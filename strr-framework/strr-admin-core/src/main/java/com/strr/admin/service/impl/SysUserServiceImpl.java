@@ -30,6 +30,7 @@ public class SysUserServiceImpl extends SCrudServiceImpl<SysUser, Integer> imple
     @Override
     public void saveWithRel(SysUser sysUser, Integer[] oldRids, Integer[] newRids) {
         if (sysUser.getId() == null) {
+            sysUser.setPassword("$2a$10$LBfxhQw8tw6a1eENVgk5l.mcmcM5LqAB4XIUF5BlNESO50Nq/WQ5S");
             save(sysUser);
         } else {
             update(sysUser);

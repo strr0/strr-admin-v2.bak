@@ -33,6 +33,12 @@ public class SysUserDetails extends SysUser implements UserDetails {
 
     @Override
     @JsonIgnore
+    public String getPassword() {
+        return super.getPassword();
+    }
+
+    @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roleList.stream().map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());

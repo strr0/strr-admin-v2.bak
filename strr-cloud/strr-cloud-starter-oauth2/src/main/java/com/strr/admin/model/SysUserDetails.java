@@ -10,6 +10,12 @@ import java.util.Collections;
 public class SysUserDetails extends SysUser implements UserDetails {
     @Override
     @JsonIgnore
+    public String getPassword() {
+        return super.getPassword();
+    }
+
+    @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.EMPTY_LIST;
     }
