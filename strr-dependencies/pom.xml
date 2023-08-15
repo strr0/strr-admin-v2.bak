@@ -17,6 +17,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <spring-boot.version>3.0.0</spring-boot.version>
         <spring-cloud.version>2022.0.0</spring-cloud.version>
+        <oauth.version>1.0.0</oauth.version>
         <mybatis-boot.version>3.0.0</mybatis-boot.version>
         <mybatis-spring.version>3.0.0</mybatis-spring.version>
         <mybatis.version>3.5.11</mybatis.version>
@@ -41,6 +42,13 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!--  oauth2-authorization  -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-authorization-server</artifactId>
+                <version>${oauth.version}</version>
             </dependency>
 
             <!--  mybatis  -->
