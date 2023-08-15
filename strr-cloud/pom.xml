@@ -16,6 +16,7 @@
         <module>strr-cloud-starter-config</module>
         <module>strr-cloud-starter-eureka</module>
         <module>strr-cloud-starter-oauth2</module>
+        <module>strr-cloud-starter-oauth2-gateway</module>
     </modules>
 
     <properties>
