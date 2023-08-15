@@ -18,6 +18,7 @@
         <module>strr-cloud-starter-oauth2</module>
         <module>strr-cloud-starter-oauth2-gateway</module>
         <module>strr-cloud-starter-admin</module>
+        <module>strr-cloud-starter-gateway</module>
     </modules>
 
     <properties>
