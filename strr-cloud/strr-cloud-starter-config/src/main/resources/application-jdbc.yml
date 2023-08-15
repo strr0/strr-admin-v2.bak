@@ -1,0 +1,19 @@
+server:
+  port: 8888
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${ipaddr}:3306/strr_admin?serverTimezone=UTC
+    username: root
+    password: '{cipher}b508a19f5f714b97916c70bd872da77208e5dca3da9830fefe9a1a50f683de9c'
+  cloud:
+    config:
+      server:
+        encrypt:
+          enabled: true
+        jdbc:
+          sql: 'SELECT `KEY`, `VALUE` from SYS_PROPERTIES where APPLICATION = ? and PROFILE= ? and LABEL = ?'
+          sql-without-profile: 'SELECT `KEY`, `VALUE` from SYS_PROPERTIES where APPLICATION = ? and PROFILE is null and LABEL = ?'
+encrypt:
+  key: secret
+ipaddr: 127.0.0.1
