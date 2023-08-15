@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.strr.admin.mapper.SysRoleMapper">
+    <insert id="saveRel">
+        insert into sys_rel_role_authority values(#{rid}, #{aid})
+    </insert>
+
+    <delete id="removeRel">
+        delete sys_rel_role_authority where rid = #{rid} and aid = #{aid}
+    </delete>
+
+    <select id="listRelByRid" resultType="java.lang.Integer">
+        select aid from sys_rel_role_authority where rid = #{rid}
+    </select>
+
+    <delete id="removeRARelByRid">
+        delete from sys_rel_role_authority where rid = #{rid}
+    </delete>
+
+    <delete id="removeURRelByRid">
+        delete from sys_rel_user_role where rid = #{rid}
+    </delete>
+</mapper>
