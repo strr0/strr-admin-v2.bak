@@ -38,6 +38,8 @@ import java.util.UUID;
 public class AuthorizationServerConfig {
     @Value("${url.gateway:http://127.0.0.1:8000}")
     private String gatewayUrl;
+    @Value("${url.web:http://127.0.0.1:8080}")
+    private String webUrl;
 
     /**
      * A Spring Security filter chain for the Protocol Endpoints.
@@ -64,9 +66,9 @@ public class AuthorizationServerConfig {
      */
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
-        RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                .clientId("STRR_CLIENT")
-                .clientSecret("$2a$10$OorZmxepTUuFZKzRVm1j2O6aVRDRaFq4nQ/kI5Gu4tFyPy5qqawP.")   // STRR_SECRET
+        RegisteredClient gatewayClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("GATEWAY_CLIENT")
+                .clientSecret("$2a$10$3Mm.l4wLwZ3Lt7g.T6AtI.794LVvJxGVDw1ddx6pKO3NbZtnpPFoi")   // GATEWAY_SECRET
                 .clientAuthenticationMethods(methods -> {
                     methods.add(ClientAuthenticationMethod.CLIENT_SECRET_BASIC);
                     methods.add(ClientAuthenticationMethod.CLIENT_SECRET_POST);
@@ -80,7 +82,23 @@ public class AuthorizationServerConfig {
                 .scopes(ScopeWithDescription::addScope)
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())  // 无需同意页面
                 .build();
-        return new InMemoryRegisteredClientRepository(registeredClient);
+        RegisteredClient webClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("WEB_CLIENT")
+                .clientSecret("$2a$10$dnE/6hRuQHrBNQokKC5qfu/8wmhvuKAMbo8fZm5Ik7V6ZNqYPjKRi")   // WEB_SECRET
+                .clientAuthenticationMethods(methods -> {
+                    methods.add(ClientAuthenticationMethod.CLIENT_SECRET_BASIC);
+                    methods.add(ClientAuthenticationMethod.CLIENT_SECRET_POST);
+                })
+                .authorizationGrantTypes(types -> {
+                    types.add(AuthorizationGrantType.AUTHORIZATION_CODE);
+                    types.add(AuthorizationGrantType.REFRESH_TOKEN);
+                    types.add(AuthorizationGrantType.CLIENT_CREDENTIALS);
+                })
+                .redirectUri(webUrl)
+                .scopes(ScopeWithDescription::addScope)
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())  // 无需同意页面
+                .build();
+        return new InMemoryRegisteredClientRepository(gatewayClient, webClient);
     }
 
     /**
