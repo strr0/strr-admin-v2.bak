@@ -12,6 +12,7 @@
         <module>strr-dependencies</module>
         <module>strr-framework</module>
         <module>strr-boot</module>
+        <module>strr-cloud</module>
     </modules>
 
     <properties>
