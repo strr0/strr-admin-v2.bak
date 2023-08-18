@@ -1,11 +1,9 @@
 package com.strr.util;
 
-import org.springframework.beans.BeanUtils;
 
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class TreeUtil {
     /**
@@ -39,13 +37,12 @@ public class TreeUtil {
     /**
      * 反向建树 - 有序
      */
-    public static <S, T extends S> List<T> reverseBuildTree(List<S> list, Function<S, Integer> getId, Function<S, Integer> getPid, Function<T, Integer> getOrder,
-                                                            Supplier<T> newT, Function<T, List<T>> getChildren, BiConsumer<T, List<T>> setChildren) {
+    public static <S, T> List<T> reverseBuildTree(List<S> list, Function<S, Integer> getId, Function<S, Integer> getPid, Function<T, Integer> getOrder,
+                                                            Function<S, T> s2t, Function<T, List<T>> getChildren, BiConsumer<T, List<T>> setChildren) {
         Map<Integer, T> itemMap = new HashMap<>();
         List<T> tree = new LinkedList<>();
         list.forEach(source -> {
-            T target = newT.get();
-            BeanUtils.copyProperties(source, target);
+            T target = s2t.apply(source);
             T parent = itemMap.get(getPid.apply(source));
             if (parent != null) {
                 List<T> children = getChildren.apply(parent);
@@ -67,9 +64,9 @@ public class TreeUtil {
     /**
      * 反向建树 - 无序
      */
-    public static <S, T extends S> List<T> reverseBuildTree(List<S> list, Function<S, Integer> getId, Function<S, Integer> getPid,
-                                                            Supplier<T> newT, Function<T, List<T>> getChildren, BiConsumer<T, List<T>> setChildren) {
-        return reverseBuildTree(list, getId, getPid, null, newT, getChildren, setChildren);
+    public static <S, T> List<T> reverseBuildTree(List<S> list, Function<S, Integer> getId, Function<S, Integer> getPid,
+                                                            Function<S, T> s2t, Function<T, List<T>> getChildren, BiConsumer<T, List<T>> setChildren) {
+        return reverseBuildTree(list, getId, getPid, null, s2t, getChildren, setChildren);
     }
 
     /**

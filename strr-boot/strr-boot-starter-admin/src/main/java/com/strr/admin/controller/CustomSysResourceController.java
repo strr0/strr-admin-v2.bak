@@ -1,7 +1,7 @@
 package com.strr.admin.controller;
 
 import com.strr.admin.model.SysResource;
-import com.strr.admin.model.SysResourceVO;
+import com.strr.admin.model.SysRouteVO;
 import com.strr.admin.model.SysUserDetails;
 import com.strr.admin.service.SysResourceService;
 import com.strr.admin.util.SysUtil;
@@ -24,9 +24,9 @@ public class CustomSysResourceController extends SysResourceController {
      * 用户菜单树
      * @return
      */
-    @GetMapping("/userMenuTree")
-    public Result<List<SysResourceVO>> userMenuTree(@AuthenticationPrincipal SysUserDetails sysUserDetails) {
+    @GetMapping("/routeTree")
+    public Result<List<SysRouteVO>> routeTree(@AuthenticationPrincipal SysUserDetails sysUserDetails) {
         List<SysResource> resources = sysUserDetails.getResourceList();
-        return Result.ok(SysUtil.buildMenuTree(resources));
+        return Result.ok(SysUtil.buildRouteTree(resources));
     }
 }
