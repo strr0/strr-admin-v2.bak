@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/admin/sysProperties")
 public class SysPropertiesController {
     private final SysPropertiesService sysPropertiesService;
 
@@ -19,7 +18,6 @@ public class SysPropertiesController {
      * 新增
      */
     @PostMapping("/save")
-    @ResponseBody
     public Result<SysProperties> save(SysProperties entity) {
         int r = sysPropertiesService.save(entity);
         if (r > 0) {
@@ -32,7 +30,6 @@ public class SysPropertiesController {
      * 批量新增
      */
     @PostMapping("/batchSave")
-    @ResponseBody
     public Result<Integer> batchSave(@RequestBody List<SysProperties> list) {
         int r = sysPropertiesService.batchSave(list);
         if (r > 0) {
@@ -45,7 +42,6 @@ public class SysPropertiesController {
      * 修改
      */
     @PutMapping("/update")
-    @ResponseBody
     public Result<SysProperties> update(SysProperties entity) {
         int r = sysPropertiesService.update(entity);
         if (r > 0) {
@@ -58,7 +54,6 @@ public class SysPropertiesController {
      * 删除
      */
     @DeleteMapping("/remove")
-    @ResponseBody
     public Result<Void> remove(Integer id) {
         int r = sysPropertiesService.remove(id);
         if (r > 0) {
@@ -71,7 +66,6 @@ public class SysPropertiesController {
      * 批量删除
      */
     @DeleteMapping("/batchRemove")
-    @ResponseBody
     public Result<Void> batchRemove(String application) {
         int r = sysPropertiesService.batchRemove(application);
         if (r > 0) {
@@ -84,7 +78,6 @@ public class SysPropertiesController {
      * 获取应用列表
      */
     @GetMapping("/listApplication")
-    @ResponseBody
     public Result<List<SysProperties>> listApplication(String application) {
         List<SysProperties> list = sysPropertiesService.listApplication(application);
         return Result.ok(list);
@@ -94,7 +87,6 @@ public class SysPropertiesController {
      * 获取属性列表
      */
     @GetMapping("/listProperties")
-    @ResponseBody
     public Result<List<SysProperties>> listProperties(String application) {
         List<SysProperties> list = sysPropertiesService.listProperties(application);
         return Result.ok(list);

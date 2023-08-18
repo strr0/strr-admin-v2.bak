@@ -1,7 +1,7 @@
 package com.strr.admin.util;
 
-import com.strr.admin.model.SysAuthority;
-import com.strr.admin.model.SysAuthorityVO;
+import com.strr.admin.model.SysResource;
+import com.strr.admin.model.SysResourceVO;
 import com.strr.util.TreeUtil;
 
 import java.util.ArrayList;
@@ -11,12 +11,12 @@ import java.util.List;
 public class SysUtil {
     /**
      * 菜单树
-     * @param authorities
+     * @param resources
      * @return
      */
-    public static List<SysAuthorityVO> buildMenuTree(List<SysAuthority> authorities) {
-        return TreeUtil.reverseBuildTree(authorities, SysAuthority::getId, SysAuthority::getParentId, SysAuthority::getSeq,
-                SysAuthorityVO::new, SysAuthorityVO::getChildren, SysAuthorityVO::setChildren);
+    public static List<SysResourceVO> buildMenuTree(List<SysResource> resources) {
+        return TreeUtil.reverseBuildTree(resources, SysResource::getId, SysResource::getParentId, SysResource::getOrder,
+                SysResourceVO::new, SysResourceVO::getChildren, SysResourceVO::setChildren);
     }
 
     /**

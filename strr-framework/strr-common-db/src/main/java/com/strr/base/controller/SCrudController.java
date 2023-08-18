@@ -12,13 +12,11 @@ public abstract class SCrudController<T, ID extends Serializable> {
     protected abstract SCrudService<T, ID> getService();
 
     @GetMapping("/page")
-    @ResponseBody
     public Page<T> page(T param, Pageable pageable) {
         return getService().page(param, pageable);
     }
 
     @PostMapping("/save")
-    @ResponseBody
     public Result<T> save(T entity) {
         int r = getService().save(entity);
         if (r > 0) {
@@ -28,7 +26,6 @@ public abstract class SCrudController<T, ID extends Serializable> {
     }
 
     @PutMapping("/update")
-    @ResponseBody
     public Result<T> update(T entity) {
         int r = getService().update(entity);
         if (r > 0) {
@@ -38,7 +35,6 @@ public abstract class SCrudController<T, ID extends Serializable> {
     }
 
     @DeleteMapping("/remove")
-    @ResponseBody
     public Result<Void> remove(ID id) {
         int r = getService().remove(id);
         if (r > 0) {
@@ -48,7 +44,6 @@ public abstract class SCrudController<T, ID extends Serializable> {
     }
 
     @GetMapping("/get")
-    @ResponseBody
     public Result<T> get(ID id) {
         T t = getService().get(id);
         if (t != null) {

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/admin/sysRole")
 public class SysRoleController extends SCrudController<SysRole, Integer> {
     private final SysRoleService sysRoleService;
 
@@ -27,7 +26,6 @@ public class SysRoleController extends SCrudController<SysRole, Integer> {
      * @return
      */
     @GetMapping("/list")
-    @ResponseBody
     public Result<List<SysRole>> list() {
         List<SysRole> list = sysRoleService.list();
         return Result.ok(list);
@@ -41,7 +39,6 @@ public class SysRoleController extends SCrudController<SysRole, Integer> {
      * @return
      */
     @PostMapping("/updateRel")
-    @ResponseBody
     public Result<Void> updateRel(Integer rid, Integer[] oldAids, Integer[] newAids) {
         sysRoleService.updateRel(rid, oldAids, newAids);
         return Result.ok();
@@ -53,7 +50,6 @@ public class SysRoleController extends SCrudController<SysRole, Integer> {
      * @return
      */
     @GetMapping("/listRelByRid")
-    @ResponseBody
     public Result<List<Integer>> listRelByRid(Integer rid) {
         List<Integer> data = sysRoleService.listRelByRid(rid);
         return Result.ok(data);
@@ -65,7 +61,6 @@ public class SysRoleController extends SCrudController<SysRole, Integer> {
      * @return
      */
     @DeleteMapping("/removeInfo")
-    @ResponseBody
     public Result<Void> removeInfo(Integer id) {
         sysRoleService.removeWithRel(id);
         return Result.ok();

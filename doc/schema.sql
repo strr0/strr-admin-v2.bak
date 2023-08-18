@@ -15,89 +15,86 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for sys_authority
+-- Table structure for sys_resource
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_authority`;
-CREATE TABLE `sys_authority`  (
+DROP TABLE IF EXISTS `sys_resource`;
+CREATE TABLE `sys_resource`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '编号',
   `url` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求路径',
-  `path` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路由',
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
+  `path` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路由地址',
+  `component` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路由组件',
   `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题',
   `color` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '颜色',
   `icon` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图标',
   `parent_id` int NULL DEFAULT NULL COMMENT '父菜单',
-  `type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '按钮类型',
-  `seq` int NULL DEFAULT NULL COMMENT '排序',
-  `sys` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '默认',
+  `order` int NULL DEFAULT NULL COMMENT '排序',
   `creator` int NULL DEFAULT NULL COMMENT '创建人',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `updator` int NULL DEFAULT NULL COMMENT '更新人',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `status` tinyint(1) NULL DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of sys_authority
+-- Records of sys_resource
 -- ----------------------------
-INSERT INTO `sys_authority` VALUES (1, NULL, '/home', 'Home', '后台管理', NULL, NULL, 0, 0, NULL, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (2, '', '/admin', 'Admin', '系统管理', NULL, NULL, 1, 0, NULL, 1, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `sys_authority` VALUES (3, '/admin/user', '/user', 'User', '用户管理', NULL, NULL, 2, 1, NULL, 1, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `sys_authority` VALUES (4, '/admin/role', '/role', 'Role', '角色管理', NULL, NULL, 2, 1, NULL, 1, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `sys_authority` VALUES (5, '/admin/authority', '/authority', 'Authority', '权限管理', NULL, NULL, 2, 1, NULL, 1, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `sys_authority` VALUES (6, NULL, NULL, 'show', '查看', 'primary', 'el-icon-view', 3, 2, NULL, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (7, NULL, NULL, 'add', '添加', 'success', 'el-icon-plus', 3, 2, NULL, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (8, NULL, NULL, 'edit', '修改', 'warning', 'el-icon-edit', 3, 2, NULL, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (9, NULL, NULL, 'del', '删除', 'danger', 'el-icon-delete', 3, 2, NULL, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (10, NULL, NULL, 'alloc', '权限', 'primary', 'el-icon-view', 4, 2, NULL, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (11, NULL, NULL, 'add', '添加', 'success', 'el-icon-plus', 4, 2, NULL, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (12, NULL, NULL, 'edit', '修改', 'warning', 'el-icon-edit', 4, 2, NULL, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (13, NULL, NULL, 'del', '删除', 'danger', 'el-icon-delete', 4, 2, NULL, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (14, NULL, NULL, 'show', '查看', 'primary', 'el-icon-view', 5, 2, NULL, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (15, NULL, NULL, 'add', '添加', 'success', 'el-icon-plus', 5, 2, NULL, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (16, NULL, NULL, 'edit', '修改', 'warning', 'el-icon-edit', 5, 2, NULL, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (17, NULL, NULL, 'del', '删除', 'danger', 'el-icon-delete', 5, 2, NULL, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (18, '/admin/properties', '/properties', 'Properties', '配置管理', NULL, NULL, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (19, '/admin/properties/components/show', '/propertiesShow', 'show', '配置详情', 'primary', 'el-icon-view', 18, '3', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (20, NULL, NULL, 'add', '添加', 'success', 'el-icon-plus', 18, '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (21, NULL, NULL, 'del', '删除', 'danger', 'el-icon-delete', 18, '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_authority` VALUES (22, '/admin/server', '/server', 'Server', '服务管理', NULL, NULL, 1, '1', 1, '1', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (1, NULL, 'Admin', '/admin', 'basic', '系统管理', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_resource` VALUES (2, '/admin/user', 'User', '/user', 'self', '用户管理', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_resource` VALUES (3, '/admin/role', 'Role', '/role', 'self', '角色管理', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_resource` VALUES (4, '/admin/authority', 'Authority', '/authority', 'self', '权限管理', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_resource` VALUES (5, NULL, 'show', NULL, NULL, '查看', 'primary', 'el-icon-view', 2, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (6, NULL, 'add', NULL, NULL, '添加', 'success', 'el-icon-plus', 2, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (7, NULL, 'edit', NULL, NULL, '修改', 'warning', 'el-icon-edit', 2, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (8, NULL, 'del', NULL, NULL, '删除', 'danger', 'el-icon-delete', 2, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (9, NULL, 'alloc', NULL, NULL, '权限', 'primary', 'el-icon-view', 3, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (10, NULL, 'add', NULL, NULL, '添加', 'success', 'el-icon-plus', 3, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (11, NULL, 'edit', NULL, NULL, '修改', 'warning', 'el-icon-edit', 3, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (12, NULL, 'del', NULL, NULL, '删除', 'danger', 'el-icon-delete', 3, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (13, NULL, 'show', NULL, NULL, '查看', 'primary', 'el-icon-view', 4, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (14, NULL, 'add', NULL, NULL, '添加', 'success', 'el-icon-plus', 4, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (15, NULL, 'edit', NULL, NULL, '修改', 'warning', 'el-icon-edit', 4, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (16, NULL, 'del', NULL, NULL, '删除', 'danger', 'el-icon-delete', 4, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (17, '/admin/properties', 'Properties', '/properties', 'self', '配置管理', NULL, NULL, 0, 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (18, '/admin/properties/components/show', 'show', '/propertiesShow', 'self', '配置详情', 'primary', 'el-icon-view', 17, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (19, NULL, 'add', NULL, NULL, '添加', 'success', 'el-icon-plus', 17, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (20, NULL, 'del', NULL, NULL, '删除', 'danger', 'el-icon-delete', 17, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (21, '/admin/server', 'Server', '/server', 'self', '服务管理', NULL, NULL, 0, 1, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
--- Table structure for sys_rel_role_authority
+-- Table structure for sys_rel_role_resource
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_rel_role_authority`;
-CREATE TABLE `sys_rel_role_authority`  (
+DROP TABLE IF EXISTS `sys_rel_role_resource`;
+CREATE TABLE `sys_rel_role_resource`  (
   `rid` int NULL DEFAULT NULL COMMENT '角色id',
-  `aid` int NULL DEFAULT NULL COMMENT '权限id'
+  `rsid` int NULL DEFAULT NULL COMMENT '资源id'
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of sys_rel_role_authority
+-- Records of sys_rel_role_resource
 -- ----------------------------
-INSERT INTO `sys_rel_role_authority` VALUES (1, 1);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 2);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 3);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 4);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 5);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 6);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 7);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 8);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 9);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 10);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 11);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 12);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 13);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 14);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 15);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 16);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 17);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 18);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 19);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 20);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 21);
-INSERT INTO `sys_rel_role_authority` VALUES (1, 22);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 1);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 2);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 3);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 4);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 5);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 6);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 7);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 8);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 9);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 10);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 11);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 12);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 13);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 14);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 15);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 16);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 17);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 18);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 19);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 20);
+INSERT INTO `sys_rel_role_resource` VALUES (1, 21);
 
 -- ----------------------------
 -- Table structure for sys_rel_user_role
@@ -190,7 +187,7 @@ INSERT INTO `sys_properties` VALUES (9, 'adminservice', NULL, 'master', 'eureka.
 INSERT INTO `sys_properties` VALUES (10, 'adminservice', NULL, 'master', 'eureka.client.register-with-eureka', '注册到eureka', 'true');
 INSERT INTO `sys_properties` VALUES (11, 'adminservice', NULL, 'master', 'eureka.client.fetch-registry', '本地缓存', 'true');
 INSERT INTO `sys_properties` VALUES (12, 'adminservice', NULL, 'master', 'eureka.client.service-url.defaultZone', '注册中心地址', 'http://localhost:8761/eureka');
-INSERT INTO `sys_properties` VALUES (13, 'adminservice', NULL, 'master', 'ipaddr', 'ip地址', '127.0.0.1');
+INSERT INTO `sys_properties` VALUES (13, 'adminservice', NULL, 'master', 'ipaddr', 'ip地址', 'localhost');
 INSERT INTO `sys_properties` VALUES (14, 'adminservice', 'dev', 'master', 'springdoc.packagesToScan', 'swagger扫描路径', 'com.strr');
 INSERT INTO `sys_properties` VALUES (15, 'adminservice', 'dev', 'master', 'springdoc.swagger-ui.enabled', '开启swagger', 'true');
 INSERT INTO `sys_properties` VALUES (16, 'adminservice', NULL, 'master', 'spring.datasource.driver-class-name', '数据库驱动', 'com.mysql.cj.jdbc.Driver');
@@ -204,7 +201,7 @@ INSERT INTO `sys_properties` VALUES (23, 'feignservice', NULL, 'master', 'eureka
 INSERT INTO `sys_properties` VALUES (24, 'feignservice', NULL, 'master', 'eureka.client.register-with-eureka', '注册到eureka', 'true');
 INSERT INTO `sys_properties` VALUES (25, 'feignservice', NULL, 'master', 'eureka.client.fetch-registry', '本地缓存', 'true');
 INSERT INTO `sys_properties` VALUES (26, 'feignservice', NULL, 'master', 'eureka.client.service-url.defaultZone', '注册中心地址', 'http://localhost:8761/eureka');
-INSERT INTO `sys_properties` VALUES (27, 'authservice', NULL, 'master', 'ipaddr', 'ip地址', '127.0.0.1');
+INSERT INTO `sys_properties` VALUES (27, 'authservice', NULL, 'master', 'ipaddr', 'ip地址', 'localhost');
 INSERT INTO `sys_properties` VALUES (28, 'authservice', NULL, 'master', 'server.port', '端口', '9000');
 INSERT INTO `sys_properties` VALUES (29, 'authservice', NULL, 'master', 'url.gateway', '网关地址', 'http://${ipaddr}:8000');
 INSERT INTO `sys_properties` VALUES (30, 'oauth2gatewayservice', NULL, 'master', 'server.port', '端口', '8000');
@@ -227,7 +224,7 @@ INSERT INTO `sys_properties` VALUES (46, 'oauth2gatewayservice', NULL, 'master',
 INSERT INTO `sys_properties` VALUES (47, 'oauth2gatewayservice', NULL, 'master', 'management.endpoint.gateway.enabled', 'actuator', 'true');
 INSERT INTO `sys_properties` VALUES (48, 'oauth2gatewayservice', NULL, 'master', 'management.endpoints.web.exposure.include', 'actuator', 'gateway');
 INSERT INTO `sys_properties` VALUES (49, 'oauth2gatewayservice', NULL, 'master', 'url.web', '前端地址', 'http://${ipaddr}:8080');
-INSERT INTO `sys_properties` VALUES (50, 'oauth2gatewayservice', NULL, 'master', 'ipaddr', 'ip地址', '127.0.0.1');
+INSERT INTO `sys_properties` VALUES (50, 'oauth2gatewayservice', NULL, 'master', 'ipaddr', 'ip地址', 'localhost');
 INSERT INTO `sys_properties` VALUES (51, 'eurekaservice', NULL, 'master', 'server.port', '端口', '8761');
 INSERT INTO `sys_properties` VALUES (52, 'eurekaservice', NULL, 'master', 'eureka.client.register-with-eureka', '注册到eureka', 'false');
 INSERT INTO `sys_properties` VALUES (53, 'eurekaservice', NULL, 'master', 'eureka.client.fetch-registry', '本地缓存', 'false');
@@ -245,5 +242,6 @@ INSERT INTO `sys_properties` VALUES (64, 'authservice', NULL, 'master', 'eureka.
 INSERT INTO `sys_properties` VALUES (65, 'authservice', NULL, 'master', 'eureka.client.register-with-eureka', '注册到eureka', 'true');
 INSERT INTO `sys_properties` VALUES (66, 'authservice', NULL, 'master', 'eureka.client.fetch-registry', '本地缓存', 'true');
 INSERT INTO `sys_properties` VALUES (67, 'authservice', NULL, 'master', 'eureka.client.service-url.defaultZone', '注册中心地址', 'http://localhost:8761/eureka');
+INSERT INTO `sys_properties` VALUES (68, 'authservice', NULL, 'master', 'url.web', '前端地址', 'http://${ipaddr}:8080');
 
 SET FOREIGN_KEY_CHECKS = 1;

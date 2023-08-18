@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/admin/sysUser")
 public class SysUserController extends SCrudController<SysUser, Integer> {
     private final SysUserService sysUserService;
 
@@ -30,7 +29,6 @@ public class SysUserController extends SCrudController<SysUser, Integer> {
      * @return
      */
     @PostMapping("/saveInfo")
-    @ResponseBody
     public Result<Void> saveInfo(SysUser sysUser, Integer[] oldRids, Integer[] newRids) {
         sysUserService.saveWithRel(sysUser, oldRids, newRids);
         return Result.ok();
@@ -42,7 +40,6 @@ public class SysUserController extends SCrudController<SysUser, Integer> {
      * @return
      */
     @GetMapping("/listRelByUid")
-    @ResponseBody
     public Result<List<Integer>> listRelByUid(Integer uid) {
         List<Integer> data = sysUserService.listRelByUid(uid);
         return Result.ok(data);
@@ -54,7 +51,6 @@ public class SysUserController extends SCrudController<SysUser, Integer> {
      * @return
      */
     @DeleteMapping("/removeInfo")
-    @ResponseBody
     public Result<Void> removeInfo(Integer id) {
         sysUserService.removeWithRel(id);
         return Result.ok();

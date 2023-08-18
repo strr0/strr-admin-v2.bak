@@ -1,7 +1,7 @@
 package com.strr.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.strr.admin.mapper.SysAuthorityMapper;
+import com.strr.admin.mapper.SysResourceMapper;
 import com.strr.admin.mapper.SysUserDetailsMapper;
 import com.strr.admin.model.SysUserDetails;
 import com.strr.base.model.Result;
@@ -23,7 +23,7 @@ public class WebSecurityConfig {
     @Autowired
     private SysUserDetailsMapper sysUserDetailsMapper;
     @Autowired
-    private SysAuthorityMapper sysAuthorityMapper;
+    private SysResourceMapper sysResourceMapper;
 
     /**
      * A Spring Security filter chain for authentication.
@@ -73,7 +73,7 @@ public class WebSecurityConfig {
             if (!userDetailsList.isEmpty()) {
                 SysUserDetails userDetails = userDetailsList.get(0);
                 userDetails.setRoleList(sysUserDetailsMapper.listRoleByUserId(userDetails.getId()));
-                userDetails.setAuthorityList(sysAuthorityMapper.listByUserId(userDetails.getId()));
+                userDetails.setResourceList(sysResourceMapper.listByUserId(userDetails.getId()));
                 return userDetails;
             }
             throw new UsernameNotFoundException(String.format("User '%s' not found.", username));
