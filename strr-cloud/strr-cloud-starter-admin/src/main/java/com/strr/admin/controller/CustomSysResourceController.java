@@ -9,7 +9,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,7 +25,6 @@ public class CustomSysResourceController extends SysResourceController {
      * @return
      */
     @GetMapping("/userMenuTree")
-    @ResponseBody
     public Result<List<SysResourceVO>> userMenuTree(@AuthenticationPrincipal Jwt jwt) {
         List<SysResource> resources = ((SysResourceService) getService()).listByUserId(((Long) jwt.getClaims().get("user_id")).intValue());
         return Result.ok(SysUtil.buildMenuTree(resources));

@@ -9,8 +9,6 @@ import com.strr.base.model.Result;
 import com.strr.base.service.SCrudService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -32,7 +30,6 @@ public class SysResourceController extends SCrudController<SysResource, Integer>
      * @return
      */
     @GetMapping("/menuTree")
-    @ResponseBody
     public Result<List<SysResourceVO>> menuTree(SysResource param) {
         List<SysResource> sysAuthorityList = sysResourceService.listByParam(param);
         return Result.ok(SysUtil.buildMenuTree(sysAuthorityList));
@@ -44,7 +41,6 @@ public class SysResourceController extends SCrudController<SysResource, Integer>
      * @return
      */
     @DeleteMapping("/removeInfo")
-    @ResponseBody
     public Result<Void> removeInfo(Integer id) {
         sysResourceService.removeWithRel(id);
         return Result.ok();
