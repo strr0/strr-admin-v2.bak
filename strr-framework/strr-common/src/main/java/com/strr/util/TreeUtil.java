@@ -3,6 +3,7 @@ package com.strr.util;
 
 import java.util.*;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class TreeUtil<S, T, K> {
@@ -30,6 +31,16 @@ public class TreeUtil<S, T, K> {
      * 获取排序
      */
     private Function<T, Integer> getOrder;
+
+    /**
+     * 添加按钮
+     */
+    private BiFunction<S, T, Boolean> addButton;
+
+    /**
+     * 添加布局
+     */
+    private BiConsumer<S, T> addLayout;
 
     /**
      * 获取子节点
@@ -65,6 +76,16 @@ public class TreeUtil<S, T, K> {
         return this;
     }
 
+    public TreeUtil<S, T, K> withAddButton(BiFunction<S, T, Boolean> addButton) {
+        this.addButton = addButton;
+        return this;
+    }
+
+    public TreeUtil<S, T, K> withAddLayout(BiConsumer<S, T> addLayout) {
+        this.addLayout = addLayout;
+        return this;
+    }
+
     public TreeUtil<S, T, K> withGetChildren(Function<T, List<T>> getChildren) {
         this.getChildren = getChildren;
         return this;
@@ -85,16 +106,24 @@ public class TreeUtil<S, T, K> {
             T target = transform == null ? (T) source : transform.apply(source);
             T parent = itemMap.get(getPid.apply(source));
             if (parent != null) {
+                // 添加按钮
+                if (addButton != null && addButton.apply(source, parent)) {
+                    return;
+                }
                 List<T> children = getChildren.apply(parent);
                 if (children == null) {
                     children = new LinkedList<>();
                     setChildren.accept(parent, children);
                 }
                 // 根据排序添加子节点
-                addItemInOrder(children, target, getOrder);
+                addItemInOrder(children, target);
             } else {
+                // 添加布局
+                if (addLayout != null) {
+                    addLayout.accept(source, target);
+                }
                 // 根据排序添加根节点
-                addItemInOrder(tree, target, getOrder);
+                addItemInOrder(tree, target);
             }
             itemMap.put(getId.apply(source), target);
         });
@@ -104,28 +133,28 @@ public class TreeUtil<S, T, K> {
     /**
      * 根据排序添加
      */
-    private static <S, T> void addItemInOrder(List<T> list, T item, Function<T, Integer> getOrder) {
+    private void addItemInOrder(List<T> targetList, T item) {
         // 无排序
         if (getOrder == null) {
-            list.add(item);
+            targetList.add(item);
             return;
         }
         Integer order = getOrder.apply(item);
         // order为空添加到list末尾
         if (order == null) {
-            list.add(item);
+            targetList.add(item);
             return;
         }
         int i = 0;
-        for (T target : list) {
+        for (T target : targetList) {
             Integer targetOrder = getOrder.apply(target);
             // 目标位置order为空 或 order小于目标位置order 则添加到目标位置之前
             if (targetOrder == null || order < targetOrder) {
-                list.add(i, item);
+                targetList.add(i, item);
                 return;
             }
             i++;
         }
-        list.add(item);
+        targetList.add(item);
     }
 }

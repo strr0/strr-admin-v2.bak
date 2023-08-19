@@ -20,12 +20,11 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `sys_resource`;
 CREATE TABLE `sys_resource`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `url` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求路径',
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
   `path` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路由地址',
   `component` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路由组件',
   `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题',
-  `color` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '颜色',
+  `type` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型(0.目录 1.菜单 2.按钮)',
   `icon` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图标',
   `parent_id` int NULL DEFAULT NULL COMMENT '父菜单',
   `order` int NULL DEFAULT NULL COMMENT '排序',
@@ -40,27 +39,27 @@ CREATE TABLE `sys_resource`  (
 -- ----------------------------
 -- Records of sys_resource
 -- ----------------------------
-INSERT INTO `sys_resource` VALUES (1, NULL, 'Admin', '/admin', 'basic', '系统管理', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `sys_resource` VALUES (2, '/admin/user', 'User', '/user', 'self', '用户管理', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `sys_resource` VALUES (3, '/admin/role', 'Role', '/role', 'self', '角色管理', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `sys_resource` VALUES (4, '/admin/authority', 'Authority', '/authority', 'self', '权限管理', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `sys_resource` VALUES (5, NULL, 'show', NULL, NULL, '查看', 'primary', 'el-icon-view', 2, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (6, NULL, 'add', NULL, NULL, '添加', 'success', 'el-icon-plus', 2, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (7, NULL, 'edit', NULL, NULL, '修改', 'warning', 'el-icon-edit', 2, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (8, NULL, 'del', NULL, NULL, '删除', 'danger', 'el-icon-delete', 2, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (9, NULL, 'alloc', NULL, NULL, '权限', 'primary', 'el-icon-view', 3, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (10, NULL, 'add', NULL, NULL, '添加', 'success', 'el-icon-plus', 3, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (11, NULL, 'edit', NULL, NULL, '修改', 'warning', 'el-icon-edit', 3, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (12, NULL, 'del', NULL, NULL, '删除', 'danger', 'el-icon-delete', 3, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (13, NULL, 'show', NULL, NULL, '查看', 'primary', 'el-icon-view', 4, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (14, NULL, 'add', NULL, NULL, '添加', 'success', 'el-icon-plus', 4, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (15, NULL, 'edit', NULL, NULL, '修改', 'warning', 'el-icon-edit', 4, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (16, NULL, 'del', NULL, NULL, '删除', 'danger', 'el-icon-delete', 4, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (17, '/admin/properties', 'Properties', '/properties', 'self', '配置管理', NULL, NULL, 0, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (18, '/admin/properties/components/show', 'show', '/propertiesShow', 'self', '配置详情', 'primary', 'el-icon-view', 17, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (19, NULL, 'add', NULL, NULL, '添加', 'success', 'el-icon-plus', 17, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (20, NULL, 'del', NULL, NULL, '删除', 'danger', 'el-icon-delete', 17, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (21, '/admin/server', 'Server', '/server', 'self', '服务管理', NULL, NULL, 0, 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (1, 'management', '/management', 'basic', '系统管理', '0', 'carbon:cloud-service-management', 0, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_resource` VALUES (2, 'management_user', '/management/user', 'self', '用户管理', '1', 'ic:round-manage-accounts', 1, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_resource` VALUES (3, 'management_role', '/management/role', 'self', '角色管理', '1', 'carbon:user-role', 1, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_resource` VALUES (4, 'management_resource', '/management/resource', 'self', '资源管理', '1', 'material-symbols:route', 1, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_resource` VALUES (5, 'show', NULL, NULL, '查看', '2', 'el-icon-view', 2, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (6, 'add', NULL, NULL, '添加', '2', 'el-icon-plus', 2, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (7, 'edit', NULL, NULL, '修改', '2', 'el-icon-edit', 2, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (8, 'del', NULL, NULL, '删除', '2', 'el-icon-delete', 2, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (9, 'alloc', NULL, NULL, '权限', '2', 'el-icon-view', 3, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (10, 'add', NULL, NULL, '添加', '2', 'el-icon-plus', 3, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (11, 'edit', NULL, NULL, '修改', '2', 'el-icon-edit', 3, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (12, 'del', NULL, NULL, '删除', '2', 'el-icon-delete', 3, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (13, 'show', NULL, NULL, '查看', '2', 'el-icon-view', 4, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (14, 'add', NULL, NULL, '添加', '2', 'el-icon-plus', 4, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (15, 'edit', NULL, NULL, '修改', '2', 'el-icon-edit', 4, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (16, 'del', NULL, NULL, '删除', '2', 'el-icon-delete', 4, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (17, 'management_properties', '/management/properties', 'self', '配置管理', '1', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (18, 'show', '/propertiesShow', 'self', '配置详情', '2', 'el-icon-view', 17, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (19, 'add', NULL, NULL, '添加', '2', 'el-icon-plus', 17, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (20, 'del', NULL, NULL, '删除', '2', 'el-icon-delete', 17, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (21, 'server', '/server', 'self', '服务管理', '1', NULL, 0, 1, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_rel_role_resource

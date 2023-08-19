@@ -15,11 +15,6 @@ public class SysResource {
     private Integer id;
 
     /**
-     * 请求路径
-     */
-    private String url;
-
-    /**
      * 名称
      */
     private String name;
@@ -41,9 +36,9 @@ public class SysResource {
     private String title;
 
     /**
-     * 按钮颜色
+     * 类型(0.目录 1.菜单 2.按钮)
      */
-    private String color;
+    private String type;
 
     /**
      * 图标
@@ -97,14 +92,6 @@ public class SysResource {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getName() {
         return name;
     }
@@ -137,12 +124,12 @@ public class SysResource {
         this.title = title;
     }
 
-    public String getColor() {
-        return color;
+    public String getType() {
+        return type;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getIcon() {

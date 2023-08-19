@@ -12,6 +12,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SysUtil {
+    private static final String DIR_TYPE = "0";  // 目录
+    private static final String MENU_TYPE = "1";  // 菜单
+    private static final String BTN_TYPE = "2";  // 按钮
+
+    private static final String BASIC_LAYOUT = "basic";  // 基础布局
+    private static final String BLANK_LAYOUT = "blank";  // 空白布局
+
     /**
      * 菜单树
      * @param resources
@@ -50,7 +57,43 @@ public class SysUtil {
                     BeanUtils.copyProperties(resource, meta);
                     route.setMeta(meta);
                     return route;
-                }).build();
+                })
+                // 添加按钮
+                .withAddButton((resource, route) -> {
+                    if (!BTN_TYPE.equals(resource.getType())) {
+                        return false;
+                    }
+                    List<String> buttons = route.getMeta().getButtons();
+                    if (buttons == null) {
+                        buttons = new ArrayList<>();
+                        route.getMeta().setButtons(buttons);
+                    }
+                    buttons.add(resource.getName());
+                    return true;
+                })
+                // 添加布局
+                .withAddLayout((resource, route) -> {
+                    if (MENU_TYPE.equals(resource.getType())) {
+                        route.getMeta().setSingleLayout(BASIC_LAYOUT);
+                    }
+                })
+                .build();
+    }
+
+    /**
+     * 获取第一个路由名称
+     * @param routes
+     * @return
+     */
+    public static String getFirstRoute(List<SysRouteVO> routes) {
+        if (routes == null || routes.isEmpty()) {
+            return null;
+        }
+        SysRouteVO route = routes.get(0);
+        if (route.getChildren() == null || route.getChildren().isEmpty()) {
+            return route.getName();
+        }
+        return getFirstRoute(route.getChildren());
     }
 
     /**

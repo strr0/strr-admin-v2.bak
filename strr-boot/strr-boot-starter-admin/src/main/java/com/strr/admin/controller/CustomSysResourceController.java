@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -24,9 +25,14 @@ public class CustomSysResourceController extends SysResourceController {
      * 用户菜单树
      * @return
      */
-    @GetMapping("/routeTree")
-    public Result<List<SysRouteVO>> routeTree(@AuthenticationPrincipal SysUserDetails sysUserDetails) {
+    @GetMapping("/getUserRoutes")
+    public Result<?> getUserRoutes(@AuthenticationPrincipal SysUserDetails sysUserDetails) {
         List<SysResource> resources = sysUserDetails.getResourceList();
-        return Result.ok(SysUtil.buildRouteTree(resources));
+        List<SysRouteVO> routes = SysUtil.buildRouteTree(resources);
+        String home = SysUtil.getFirstRoute(routes);
+        return Result.ok(new HashMap<String, Object>(){{
+            put("routes", routes);
+            put("home", home);
+        }});
     }
 }
