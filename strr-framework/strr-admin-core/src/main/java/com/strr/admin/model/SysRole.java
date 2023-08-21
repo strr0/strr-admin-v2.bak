@@ -26,11 +26,6 @@ public class SysRole {
     private String title;
 
     /**
-     * 排序
-     */
-    private Byte seq;
-
-    /**
      * 创建人
      */
     private Integer creator;
@@ -55,7 +50,7 @@ public class SysRole {
     /**
      * 状态
      */
-    private Byte status;
+    private String status;
 
     public Integer getId() {
         return id;
@@ -79,14 +74,6 @@ public class SysRole {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Byte getSeq() {
-        return seq;
-    }
-
-    public void setSeq(Byte seq) {
-        this.seq = seq;
     }
 
     public Integer getCreator() {
@@ -121,11 +108,11 @@ public class SysRole {
         this.updateTime = updateTime;
     }
 
-    public Byte getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

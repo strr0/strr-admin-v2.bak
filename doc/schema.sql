@@ -117,7 +117,6 @@ CREATE TABLE `sys_role`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色名称',
   `title` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题',
-  `seq` tinyint NULL DEFAULT NULL COMMENT '排序',
   `creator` int NULL DEFAULT NULL COMMENT '创建人',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `updator` int NULL DEFAULT NULL COMMENT '更新人',
@@ -129,7 +128,7 @@ CREATE TABLE `sys_role`  (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES (1, 'ROLE_ADMIN', '管理员', NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_role` VALUES (1, 'ROLE_ADMIN', '管理员', NULL, NULL, NULL, NULL, 1);
 
 -- ----------------------------
 -- Table structure for sys_user
