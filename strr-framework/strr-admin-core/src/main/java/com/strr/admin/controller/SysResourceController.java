@@ -31,8 +31,8 @@ public class SysResourceController extends SCrudController<SysResource, Integer>
      */
     @GetMapping("/menuTree")
     public Result<List<SysResourceVO>> menuTree(SysResource param) {
-        List<SysResource> sysAuthorityList = sysResourceService.listByParam(param);
-        return Result.ok(SysUtil.buildMenuTree(sysAuthorityList));
+        List<SysResource> sysResourceList = sysResourceService.listByParam(param);
+        return Result.ok(SysUtil.buildMenuTree(sysResourceList));
     }
 
     /**

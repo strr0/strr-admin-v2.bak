@@ -14,12 +14,8 @@ public interface SysRoleService extends SCrudService<SysRole, Integer> {
 
     /**
      * 更新角色权限
-     * @param rid
-     * @param oldAids
-     * @param newAids
-     * @return
      */
-    void updateRel(Integer rid, Integer[] oldAids, Integer[] newAids);
+    void updateRel(Integer rid, Integer[] oldRsids, Integer[] newRsids);
 
     /**
      * 获取角色权限

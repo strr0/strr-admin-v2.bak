@@ -9,19 +9,13 @@ import java.util.List;
 public interface SysRoleMapper extends SCrudMapper<SysRole, Integer> {
     /**
      * 添加角色权限
-     * @param rid
-     * @param aid
-     * @return
      */
-    int saveRel(@Param("rid") Integer rid, @Param("aid") Integer aid);
+    int saveRel(@Param("rid") Integer rid, @Param("rsid") Integer rsid);
 
     /**
      * 删除角色权限
-     * @param rid
-     * @param aid
-     * @return
      */
-    int removeRel(@Param("rid") Integer rid, @Param("aid") Integer aid);
+    int removeRel(@Param("rid") Integer rid, @Param("rsid") Integer rsid);
 
     /**
      * 获取权限id
@@ -35,7 +29,7 @@ public interface SysRoleMapper extends SCrudMapper<SysRole, Integer> {
      * @param rid
      * @return
      */
-    int removeRARelByRid(Integer rid);
+    int removeRRRelByRid(Integer rid);
 
     /**
      * 删除用户角色关联

@@ -33,14 +33,10 @@ public class SysRoleController extends SCrudController<SysRole, Integer> {
 
     /**
      * 更新角色权限
-     * @param rid
-     * @param oldAids
-     * @param newAids
-     * @return
      */
     @PostMapping("/updateRel")
-    public Result<Void> updateRel(Integer rid, Integer[] oldAids, Integer[] newAids) {
-        sysRoleService.updateRel(rid, oldAids, newAids);
+    public Result<Void> updateRel(Integer rid, Integer[] oldRsids, Integer[] newRsids) {
+        sysRoleService.updateRel(rid, oldRsids, newRsids);
         return Result.ok();
     }
 

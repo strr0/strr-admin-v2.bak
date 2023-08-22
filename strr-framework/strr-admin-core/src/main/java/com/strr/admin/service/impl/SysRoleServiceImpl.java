@@ -32,17 +32,14 @@ public class SysRoleServiceImpl extends SCrudServiceImpl<SysRole, Integer> imple
 
     /**
      * 更新角色权限
-     * @param rid
-     * @param oldAids
-     * @param newAids
      */
     @Override
-    public void updateRel(Integer rid, Integer[] oldAids, Integer[] newAids) {
-        for (Integer aid : SysUtil.subtraction(oldAids, newAids)) {
-            sysRoleMapper.removeRel(rid, aid);
+    public void updateRel(Integer rid, Integer[] oldRsids, Integer[] newRsids) {
+        for (Integer rsid : SysUtil.subtraction(oldRsids, newRsids)) {
+            sysRoleMapper.removeRel(rid, rsid);
         }
-        for (Integer aid : SysUtil.subtraction(newAids, oldAids)) {
-            sysRoleMapper.saveRel(rid, aid);
+        for (Integer rsid : SysUtil.subtraction(newRsids, oldRsids)) {
+            sysRoleMapper.saveRel(rid, rsid);
         }
     }
 
@@ -63,7 +60,7 @@ public class SysRoleServiceImpl extends SCrudServiceImpl<SysRole, Integer> imple
     @Override
     public void removeWithRel(Integer id) {
         sysRoleMapper.remove(id);
-        sysRoleMapper.removeRARelByRid(id);
+        sysRoleMapper.removeRRRelByRid(id);
         sysRoleMapper.removeURRelByRid(id);
     }
 }
