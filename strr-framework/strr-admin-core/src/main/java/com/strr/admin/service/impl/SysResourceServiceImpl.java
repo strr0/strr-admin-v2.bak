@@ -1,5 +1,6 @@
 package com.strr.admin.service.impl;
 
+import com.strr.admin.mapper.SysRelRoleResourceMapper;
 import com.strr.admin.mapper.SysResourceMapper;
 import com.strr.admin.model.SysResource;
 import com.strr.admin.service.SysResourceService;
@@ -10,9 +11,11 @@ import java.util.List;
 
 public class SysResourceServiceImpl extends SCrudServiceImpl<SysResource, Integer> implements SysResourceService {
     private final SysResourceMapper sysResourceMapper;
+    private final SysRelRoleResourceMapper sysRelRoleResourceMapper;
 
-    public SysResourceServiceImpl(SysResourceMapper sysResourceMapper) {
+    public SysResourceServiceImpl(SysResourceMapper sysResourceMapper, SysRelRoleResourceMapper sysRelRoleResourceMapper) {
         this.sysResourceMapper = sysResourceMapper;
+        this.sysRelRoleResourceMapper = sysRelRoleResourceMapper;
     }
 
     @Override
@@ -22,8 +25,6 @@ public class SysResourceServiceImpl extends SCrudServiceImpl<SysResource, Intege
 
     /**
      * 权限列表
-     * @param param
-     * @return
      */
     @Override
     public List<SysResource> listByParam(SysResource param) {
@@ -32,8 +33,6 @@ public class SysResourceServiceImpl extends SCrudServiceImpl<SysResource, Intege
 
     /**
      * 获取用户权限
-     * @param userId
-     * @return
      */
     @Override
     public List<SysResource> listByUserId(Integer userId) {
@@ -42,11 +41,10 @@ public class SysResourceServiceImpl extends SCrudServiceImpl<SysResource, Intege
 
     /**
      * 删除权限
-     * @param id
      */
     @Override
-    public void removeWithRel(Integer id) {
+    public void removeInfo(Integer id) {
+        sysRelRoleResourceMapper.removeByResourceId(id);
         sysResourceMapper.remove(id);
-        sysResourceMapper.removeRelByRsid(id);
     }
 }

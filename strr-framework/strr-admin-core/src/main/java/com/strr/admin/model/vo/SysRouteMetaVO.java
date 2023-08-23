@@ -1,4 +1,4 @@
-package com.strr.admin.model;
+package com.strr.admin.model.vo;
 
 import java.util.List;
 

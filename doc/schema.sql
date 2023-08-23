@@ -66,8 +66,8 @@ INSERT INTO `sys_resource` VALUES (21, 'server', '/server', 'self', '服务管�
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_rel_role_resource`;
 CREATE TABLE `sys_rel_role_resource`  (
-  `rid` int NULL DEFAULT NULL COMMENT '角色id',
-  `rsid` int NULL DEFAULT NULL COMMENT '资源id'
+  `role_id` int NULL DEFAULT NULL COMMENT '角色id',
+  `resource_id` int NULL DEFAULT NULL COMMENT '资源id'
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -100,8 +100,8 @@ INSERT INTO `sys_rel_role_resource` VALUES (1, 21);
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_rel_user_role`;
 CREATE TABLE `sys_rel_user_role`  (
-  `uid` int NULL DEFAULT NULL COMMENT '用户id',
-  `rid` int NULL DEFAULT NULL COMMENT '角色id'
+  `user_id` int NULL DEFAULT NULL COMMENT '用户id',
+  `role_id` int NULL DEFAULT NULL COMMENT '角色id'
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------

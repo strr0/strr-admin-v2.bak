@@ -1,5 +1,6 @@
 package com.strr.admin.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.strr.base.annotation.SColumn;
 import com.strr.base.annotation.SId;
 import com.strr.base.annotation.STable;
@@ -22,6 +23,7 @@ public class SysUser {
     /**
      * 密码
      */
+    @JsonIgnore
     private String password;
 
     /**

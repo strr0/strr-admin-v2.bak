@@ -1,7 +1,7 @@
 package com.strr.admin.controller;
 
 import com.strr.admin.model.SysResource;
-import com.strr.admin.model.SysResourceVO;
+import com.strr.admin.model.vo.SysResourceVO;
 import com.strr.admin.service.SysResourceService;
 import com.strr.admin.util.SysUtil;
 import com.strr.base.controller.SCrudController;
@@ -26,8 +26,6 @@ public class SysResourceController extends SCrudController<SysResource, Integer>
 
     /**
      * 菜单树
-     * @param param
-     * @return
      */
     @GetMapping("/menuTree")
     public Result<List<SysResourceVO>> menuTree(SysResource param) {
@@ -37,12 +35,10 @@ public class SysResourceController extends SCrudController<SysResource, Integer>
 
     /**
      * 删除权限
-     * @param id
-     * @return
      */
     @DeleteMapping("/removeInfo")
     public Result<Void> removeInfo(Integer id) {
-        sysResourceService.removeWithRel(id);
+        sysResourceService.removeInfo(id);
         return Result.ok();
     }
 }

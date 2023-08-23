@@ -8,25 +8,21 @@ import java.util.List;
 public interface SysRoleService extends SCrudService<SysRole, Integer> {
     /**
      * 获取角色列表
-     * @return
      */
-    List<SysRole> list();
+    List<SysRole> listByParam(SysRole param);
 
     /**
      * 更新角色权限
      */
-    void updateRel(Integer rid, Integer[] oldRsids, Integer[] newRsids);
+    void updateRel(Integer roleId, Integer[] resourceIds);
 
     /**
      * 获取角色权限
-     * @param rid
-     * @return
      */
-    List<Integer> listRelByRid(Integer rid);
+    List<Integer> listResourceId(Integer roleId);
 
     /**
      * 删除角色
-     * @param id
      */
-    void removeWithRel(Integer id);
+    void removeInfo(Integer id);
 }

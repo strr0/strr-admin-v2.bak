@@ -28,7 +28,7 @@ public class PageInterceptor implements Interceptor {
         if (pageable != null) {
             //Connection connection = (Connection) invocation.getArgs()[0];
             String sql = statementHandler.getBoundSql().getSql();
-            metaObject.setValue("delegate.boundSql.sql", String.format("%s limit %d, %d", sql, pageable.getPage() * pageable.getSize(), pageable.getSize()));
+            metaObject.setValue("delegate.boundSql.sql", String.format("%s limit %d, %d", sql, (pageable.getPage() - 1) * pageable.getSize(), pageable.getSize()));
         }
         return invocation.proceed();
     }

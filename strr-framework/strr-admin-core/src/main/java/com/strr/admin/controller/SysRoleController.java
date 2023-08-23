@@ -23,11 +23,10 @@ public class SysRoleController extends SCrudController<SysRole, Integer> {
 
     /**
      * 获取角色列表
-     * @return
      */
     @GetMapping("/list")
-    public Result<List<SysRole>> list() {
-        List<SysRole> list = sysRoleService.list();
+    public Result<List<SysRole>> list(SysRole param) {
+        List<SysRole> list = sysRoleService.listByParam(param);
         return Result.ok(list);
     }
 
@@ -35,19 +34,17 @@ public class SysRoleController extends SCrudController<SysRole, Integer> {
      * 更新角色权限
      */
     @PostMapping("/updateRel")
-    public Result<Void> updateRel(Integer rid, Integer[] oldRsids, Integer[] newRsids) {
-        sysRoleService.updateRel(rid, oldRsids, newRsids);
+    public Result<Void> updateRel(Integer roleId, Integer[] resourceIds) {
+        sysRoleService.updateRel(roleId, resourceIds);
         return Result.ok();
     }
 
     /**
      * 获取角色权限
-     * @param rid
-     * @return
      */
-    @GetMapping("/listRelByRid")
-    public Result<List<Integer>> listRelByRid(Integer rid) {
-        List<Integer> data = sysRoleService.listRelByRid(rid);
+    @GetMapping("/listResourceId")
+    public Result<List<Integer>> listResourceId(Integer roleId) {
+        List<Integer> data = sysRoleService.listResourceId(roleId);
         return Result.ok(data);
     }
 
@@ -58,7 +55,7 @@ public class SysRoleController extends SCrudController<SysRole, Integer> {
      */
     @DeleteMapping("/removeInfo")
     public Result<Void> removeInfo(Integer id) {
-        sysRoleService.removeWithRel(id);
+        sysRoleService.removeInfo(id);
         return Result.ok();
     }
 }

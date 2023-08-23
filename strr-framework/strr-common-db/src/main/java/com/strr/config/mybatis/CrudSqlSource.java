@@ -24,52 +24,54 @@ public class CrudSqlSource {
     private CrudSqlSource() {}
 
     public SqlSource countByParamSqlSource() {
-        SqlNode sqlNode = new StaticTextSqlNode(countSql().toString());
+        SqlNode sqlNode = countSqlNode();
         return new DynamicSqlSource(configuration, new MixedSqlNode(Arrays.asList(sqlNode, applyWhere)));
     }
 
     public SqlSource listByParamSqlSource() {
-        SqlNode sqlNode = new StaticTextSqlNode(listSql().toString());
+        SqlNode sqlNode = listSqlNode();
         return new DynamicSqlSource(configuration, new MixedSqlNode(Arrays.asList(sqlNode, applyWhere)));
     }
 
     public SqlSource saveSqlSource() {
-        SqlNode sqlNode = new StaticTextSqlNode(saveSql().toString());
+        SqlNode sqlNode = saveSqlNode();
         return new RawSqlSource(configuration, sqlNode, clazz);
     }
 
     public SqlSource updateSqlSource() throws BuilderException {
-        SqlNode sqlNode = new StaticTextSqlNode(updateSql().toString());
-        return new RawSqlSource(configuration, sqlNode, clazz);
+        SqlNode updateSqlNode = updateSqlNode();
+        SqlNode updateSetSqlNode = updateSetSqlNode();
+        SqlNode updateWhereSqlNode = updateWhereSqlNode();
+        return new DynamicSqlSource(configuration, new MixedSqlNode(Arrays.asList(updateSqlNode, updateSetSqlNode, updateWhereSqlNode)));
     }
 
     public SqlSource removeSqlSource() throws BuilderException {
-        SqlNode sqlNode = new StaticTextSqlNode(removeSql().toString());
+        SqlNode sqlNode = removeSqlNode();
         return new RawSqlSource(configuration, sqlNode, clazz);
     }
 
     public SqlSource getSqlSource() throws BuilderException {
-        SqlNode sqlNode = new StaticTextSqlNode(getSql().toString());
+        SqlNode sqlNode = getSqlNode();
         return new RawSqlSource(configuration, sqlNode, clazz);
     }
 
-    private SQL countSql() {
+    private SqlNode countSqlNode() {
         SQL sql = new SQL();
         sql.SELECT("count(1)");
         sql.FROM(table);
-        return sql;
+        return new StaticTextSqlNode(sql.toString());
     }
 
-    private SQL listSql() {
+    private SqlNode listSqlNode() {
         SQL sql = new SQL();
         for (Field field : fields) {
             sql.SELECT(EntityUtil.getColumn(field));
         }
         sql.FROM(table);
-        return sql;
+        return new StaticTextSqlNode(sql.toString());
     }
 
-    private SQL saveSql() {
+    private SqlNode saveSqlNode() {
         SQL sql = new SQL();
         sql.INSERT_INTO(table);
         for (Field field : fields) {
@@ -78,36 +80,44 @@ public class CrudSqlSource {
             }
             sql.VALUES(EntityUtil.getColumn(field), String.format("#{%s}", field.getName()));
         }
-        return sql;
+        return new StaticTextSqlNode(sql.toString());
     }
 
-    private SQL updateSql() throws KeyNotFoundException {
-        Field key = EntityUtil.getKey(fields);
-        String keyColumn = EntityUtil.getColumn(key);
-        String keyProperty = key.getName();
-        SQL sql = new SQL();
-        sql.UPDATE(table);
+    private SqlNode updateSqlNode() {
+        return new StaticTextSqlNode(String.format("UPDATE %s", table));
+    }
+
+    private SqlNode updateSetSqlNode() {
+        List<SqlNode> ifNodes = new ArrayList<>();
         for (Field field : fields) {
             if (EntityUtil.isKey(field)) {
                 continue;
             }
-            sql.SET(String.format("%s = #{%s}", EntityUtil.getColumn(field), field.getName()));
+            String property = field.getName();
+            ifNodes.add(new IfSqlNode(new TextSqlNode(String.format("%s = #{%s},", EntityUtil.getColumn(field), property)),
+                    String.format("%s != null && %s != ''", property, property)));
         }
-        sql.WHERE(String.format("%s = #{%s}", keyColumn, keyProperty));
-        return sql;
+        return new TrimSqlNode(configuration, new MixedSqlNode(ifNodes), "SET", null, null, ",");
     }
 
-    private SQL removeSql() throws KeyNotFoundException {
+    private SqlNode updateWhereSqlNode() throws KeyNotFoundException {
+        Field key = EntityUtil.getKey(fields);
+        String keyColumn = EntityUtil.getColumn(key);
+        String keyProperty = key.getName();
+        return new StaticTextSqlNode(String.format("WHERE %s = #{%s}", keyColumn, keyProperty));
+    }
+
+    private SqlNode removeSqlNode() throws KeyNotFoundException {
         Field key = EntityUtil.getKey(fields);
         String keyColumn = EntityUtil.getColumn(key);
         String keyProperty = key.getName();
         SQL sql = new SQL();
         sql.DELETE_FROM(table);
         sql.WHERE(String.format("%s = #{%s}", keyColumn, keyProperty));
-        return sql;
+        return new StaticTextSqlNode(sql.toString());
     }
 
-    private SQL getSql() throws KeyNotFoundException {
+    private SqlNode getSqlNode() throws KeyNotFoundException {
         Field key = EntityUtil.getKey(fields);
         String keyColumn = EntityUtil.getColumn(key);
         String keyProperty = key.getName();
@@ -117,7 +127,7 @@ public class CrudSqlSource {
         }
         sql.FROM(table);
         sql.WHERE(String.format("%s = #{%s}", keyColumn, keyProperty));
-        return sql;
+        return new StaticTextSqlNode(sql.toString());
     }
 
     public static class Builder {

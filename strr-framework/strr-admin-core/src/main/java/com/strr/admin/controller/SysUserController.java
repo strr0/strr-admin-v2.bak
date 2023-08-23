@@ -1,6 +1,7 @@
 package com.strr.admin.controller;
 
 import com.strr.admin.model.SysUser;
+import com.strr.admin.model.dto.SysUserDTO;
 import com.strr.admin.service.SysUserService;
 import com.strr.base.controller.SCrudController;
 import com.strr.base.model.Result;
@@ -23,36 +24,28 @@ public class SysUserController extends SCrudController<SysUser, Integer> {
 
     /**
      * 保存用户信息
-     * @param sysUser
-     * @param oldRids
-     * @param newRids
-     * @return
      */
     @PostMapping("/saveInfo")
-    public Result<Void> saveInfo(SysUser sysUser, Integer[] oldRids, Integer[] newRids) {
-        sysUserService.saveWithRel(sysUser, oldRids, newRids);
+    public Result<Void> saveInfo(SysUserDTO sysUser) {
+        sysUserService.saveInfo(sysUser);
         return Result.ok();
     }
 
     /**
      * 获取用户角色
-     * @param uid
-     * @return
      */
-    @GetMapping("/listRelByUid")
-    public Result<List<Integer>> listRelByUid(Integer uid) {
-        List<Integer> data = sysUserService.listRelByUid(uid);
+    @GetMapping("/listRoleId")
+    public Result<List<Integer>> listRoleId(Integer userId) {
+        List<Integer> data = sysUserService.listRoleId(userId);
         return Result.ok(data);
     }
 
     /**
      * 删除用户
-     * @param id
-     * @return
      */
     @DeleteMapping("/removeInfo")
     public Result<Void> removeInfo(Integer id) {
-        sysUserService.removeWithRel(id);
+        sysUserService.removeInfo(id);
         return Result.ok();
     }
 }

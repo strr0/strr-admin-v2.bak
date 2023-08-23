@@ -1,19 +1,11 @@
-package com.strr.admin.model;
+package com.strr.admin.model.vo;
+
+import com.strr.admin.model.SysResource;
 
 import java.util.List;
 
 public class SysResourceVO extends SysResource {
-    private String parentTitle;
-
     private List<SysResourceVO> children;
-
-    public String getParentTitle() {
-        return parentTitle;
-    }
-
-    public void setParentTitle(String parentTitle) {
-        this.parentTitle = parentTitle;
-    }
 
     public List<SysResourceVO> getChildren() {
         return children;

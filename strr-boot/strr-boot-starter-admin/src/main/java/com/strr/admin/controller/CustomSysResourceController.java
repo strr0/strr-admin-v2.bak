@@ -1,7 +1,7 @@
 package com.strr.admin.controller;
 
 import com.strr.admin.model.SysResource;
-import com.strr.admin.model.SysRouteVO;
+import com.strr.admin.model.vo.SysRouteVO;
 import com.strr.admin.model.SysUserDetails;
 import com.strr.admin.service.SysResourceService;
 import com.strr.admin.util.SysUtil;
