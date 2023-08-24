@@ -29,6 +29,11 @@ public class SysRouteMetaVO {
     private Boolean requiresAuth = true;
 
     /**
+     * 隐藏
+     */
+    private Boolean hide;
+
+    /**
      * 按钮
      */
     private List<String> buttons;
@@ -71,6 +76,14 @@ public class SysRouteMetaVO {
 
     public void setRequiresAuth(Boolean requiresAuth) {
         this.requiresAuth = requiresAuth;
+    }
+
+    public Boolean getHide() {
+        return hide;
+    }
+
+    public void setHide(Boolean hide) {
+        this.hide = hide;
     }
 
     public List<String> getButtons() {

@@ -46,6 +46,11 @@ public class SysResource {
     private String icon;
 
     /**
+     * 隐藏
+     */
+    private Boolean hide;
+
+    /**
      * 父菜单
      */
     @SColumn("parent_id")
@@ -138,6 +143,14 @@ public class SysResource {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public Boolean getHide() {
+        return hide;
+    }
+
+    public void setHide(Boolean hide) {
+        this.hide = hide;
     }
 
     public Integer getParentId() {
