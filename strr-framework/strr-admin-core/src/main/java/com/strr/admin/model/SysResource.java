@@ -1,8 +1,10 @@
 package com.strr.admin.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.strr.base.annotation.SColumn;
 import com.strr.base.annotation.SId;
 import com.strr.base.annotation.STable;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -71,6 +73,8 @@ public class SysResource {
      * 创建时间
      */
     @SColumn("create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
@@ -82,12 +86,14 @@ public class SysResource {
      * 更新时间
      */
     @SColumn("update_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     /**
      * 状态
      */
-    private String status;
+    private Integer status;
 
     public Integer getId() {
         return id;
@@ -201,11 +207,11 @@ public class SysResource {
         this.updateTime = updateTime;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

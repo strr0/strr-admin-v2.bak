@@ -61,7 +61,7 @@ INSERT INTO `sys_resource` VALUES (18, 'show', NULL, NULL, '查看', '2', 'el-ic
 INSERT INTO `sys_resource` VALUES (19, 'add', NULL, NULL, '添加', '2', 'el-icon-plus', NULL, 17, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (20, 'del', NULL, NULL, '删除', '2', 'el-icon-delete', NULL, 17, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (21, 'server', '/server', 'self', '服务管理', '1', NULL, NULL, 0, 1, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (22, 'show', '/propertiesShow', 'self', '配置详情', '2', 'el-icon-view', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (22, 'management_properties_show', '/management/propertiesShow', 'self', '配置详情', '1', 'el-icon-view', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_rel_role_resource

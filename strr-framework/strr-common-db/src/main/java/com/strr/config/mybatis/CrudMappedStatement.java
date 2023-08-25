@@ -63,12 +63,13 @@ public class CrudMappedStatement {
 
     public void addSaveStatement() {
         SqlSource save = crudSqlSource.saveSqlSource();
+        configuration.setUseGeneratedKeys(true);  // 生成主键key
         MappedStatement.Builder mappedStatementBuilder = new MappedStatement.Builder(
                 configuration,
                 String.format("%s.save", mapperInterface.getTypeName()),
                 save,
                 SqlCommandType.INSERT
-        );
+        ).keyProperty("id");  // 主键字段
         mappedStatementBuilder.resultMaps(simpleResultMaps);
         configuration.addMappedStatement(mappedStatementBuilder.build());
     }
