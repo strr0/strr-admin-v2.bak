@@ -17,7 +17,7 @@ public class SysRoleController extends SCrudController<SysRole, Integer> {
     }
 
     @Override
-    protected SCrudService<SysRole, Integer> getService() {
+    protected SysRoleService getService() {
         return sysRoleService;
     }
 

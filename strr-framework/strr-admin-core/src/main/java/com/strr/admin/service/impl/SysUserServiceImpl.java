@@ -5,7 +5,6 @@ import com.strr.admin.mapper.SysUserMapper;
 import com.strr.admin.model.SysUser;
 import com.strr.admin.model.dto.SysUserDTO;
 import com.strr.admin.service.SysUserService;
-import com.strr.base.mapper.SCrudMapper;
 import com.strr.base.service.impl.SCrudServiceImpl;
 
 import java.util.List;
@@ -20,8 +19,12 @@ public class SysUserServiceImpl extends SCrudServiceImpl<SysUser, Integer> imple
     }
 
     @Override
-    protected SCrudMapper<SysUser, Integer> getMapper() {
+    protected SysUserMapper getMapper() {
         return sysUserMapper;
+    }
+
+    protected SysRelUserRoleMapper getSysRelUserRoleMapper() {
+        return sysRelUserRoleMapper;
     }
 
     /**

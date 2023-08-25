@@ -27,7 +27,7 @@ public class CustomSysResourceController extends SysResourceController {
      */
     @GetMapping("/getUserRoutes")
     public Result<?> getUserRoutes(@AuthenticationPrincipal Jwt jwt) {
-        List<SysResource> resources = ((SysResourceService) getService()).listByUserId(((Long) jwt.getClaims().get("user_id")).intValue());
+        List<SysResource> resources = getService().listByUserId(((Long) jwt.getClaims().get("user_id")).intValue());
         List<SysRouteVO> routes = SysUtil.buildRouteTree(resources);
         String home = SysUtil.getFirstRoute(routes);
         return Result.ok(new HashMap<String, Object>(){{

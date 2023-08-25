@@ -18,7 +18,7 @@ public class SysUserController extends SCrudController<SysUser, Integer> {
     }
 
     @Override
-    protected SCrudService<SysUser, Integer> getService() {
+    protected SysUserService getService() {
         return sysUserService;
     }
 

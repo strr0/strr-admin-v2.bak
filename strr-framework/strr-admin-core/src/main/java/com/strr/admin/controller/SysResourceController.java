@@ -20,7 +20,7 @@ public class SysResourceController extends SCrudController<SysResource, Integer>
     }
 
     @Override
-    protected SCrudService<SysResource, Integer> getService() {
+    protected SysResourceService getService() {
         return sysResourceService;
     }
 

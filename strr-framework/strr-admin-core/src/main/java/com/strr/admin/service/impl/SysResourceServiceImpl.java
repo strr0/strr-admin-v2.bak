@@ -19,7 +19,7 @@ public class SysResourceServiceImpl extends SCrudServiceImpl<SysResource, Intege
     }
 
     @Override
-    protected SCrudMapper<SysResource, Integer> getMapper() {
+    protected SysResourceMapper getMapper() {
         return sysResourceMapper;
     }
 

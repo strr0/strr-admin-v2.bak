@@ -22,7 +22,7 @@ public class SysRoleServiceImpl extends SCrudServiceImpl<SysRole, Integer> imple
     }
 
     @Override
-    protected SCrudMapper<SysRole, Integer> getMapper() {
+    protected SysRoleMapper getMapper() {
         return sysRoleMapper;
     }
 
