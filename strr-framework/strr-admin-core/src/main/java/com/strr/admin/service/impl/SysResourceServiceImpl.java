@@ -4,12 +4,12 @@ import com.strr.admin.mapper.SysRelRoleResourceMapper;
 import com.strr.admin.mapper.SysResourceMapper;
 import com.strr.admin.model.SysResource;
 import com.strr.admin.service.SysResourceService;
-import com.strr.base.mapper.SCrudMapper;
 import com.strr.base.service.impl.SCrudServiceImpl;
 
+import java.util.Date;
 import java.util.List;
 
-public class SysResourceServiceImpl extends SCrudServiceImpl<SysResource, Integer> implements SysResourceService {
+public abstract class SysResourceServiceImpl extends SCrudServiceImpl<SysResource, Integer> implements SysResourceService {
     private final SysResourceMapper sysResourceMapper;
     private final SysRelRoleResourceMapper sysRelRoleResourceMapper;
 
@@ -24,7 +24,32 @@ public class SysResourceServiceImpl extends SCrudServiceImpl<SysResource, Intege
     }
 
     /**
-     * 权限列表
+     * 获取登录用户id
+     */
+    protected abstract Integer getLoginUserId();
+
+    /**
+     * 新增资源
+     */
+    @Override
+    public int save(SysResource entity) {
+        entity.setCreator(getLoginUserId());
+        entity.setCreateTime(new Date());
+        return super.save(entity);
+    }
+
+    /**
+     * 更新资源
+     */
+    @Override
+    public int update(SysResource entity) {
+        entity.setUpdator(getLoginUserId());
+        entity.setUpdateTime(new Date());
+        return super.update(entity);
+    }
+
+    /**
+     * 资源列表
      */
     @Override
     public List<SysResource> listByParam(SysResource param) {
@@ -32,7 +57,7 @@ public class SysResourceServiceImpl extends SCrudServiceImpl<SysResource, Intege
     }
 
     /**
-     * 获取用户权限
+     * 获取用户资源
      */
     @Override
     public List<SysResource> listByUserId(Integer userId) {
@@ -40,7 +65,7 @@ public class SysResourceServiceImpl extends SCrudServiceImpl<SysResource, Intege
     }
 
     /**
-     * 删除权限
+     * 删除资源
      */
     @Override
     public void removeInfo(Integer id) {

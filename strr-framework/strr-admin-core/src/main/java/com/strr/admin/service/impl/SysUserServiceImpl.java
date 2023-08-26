@@ -7,9 +7,10 @@ import com.strr.admin.model.dto.SysUserDTO;
 import com.strr.admin.service.SysUserService;
 import com.strr.base.service.impl.SCrudServiceImpl;
 
+import java.util.Date;
 import java.util.List;
 
-public class SysUserServiceImpl extends SCrudServiceImpl<SysUser, Integer> implements SysUserService {
+public abstract class SysUserServiceImpl extends SCrudServiceImpl<SysUser, Integer> implements SysUserService {
     private final SysUserMapper sysUserMapper;
     private final SysRelUserRoleMapper sysRelUserRoleMapper;
 
@@ -23,9 +24,10 @@ public class SysUserServiceImpl extends SCrudServiceImpl<SysUser, Integer> imple
         return sysUserMapper;
     }
 
-    protected SysRelUserRoleMapper getSysRelUserRoleMapper() {
-        return sysRelUserRoleMapper;
-    }
+    /**
+     * 获取登录用户id
+     */
+    protected abstract Integer getLoginUserId();
 
     /**
      * 保存用户
@@ -33,10 +35,14 @@ public class SysUserServiceImpl extends SCrudServiceImpl<SysUser, Integer> imple
     @Override
     public void saveInfo(SysUserDTO sysUser) {
         if (sysUser.getId() == null) {
+            sysUser.setCreator(getLoginUserId());
+            sysUser.setCreateTime(new Date());
             sysUser.setPassword("$2a$10$LBfxhQw8tw6a1eENVgk5l.mcmcM5LqAB4XIUF5BlNESO50Nq/WQ5S");  // abc123
             sysUserMapper.save(sysUser);
         } else {
             sysRelUserRoleMapper.removeByUserId(sysUser.getId());
+            sysUser.setUpdator(getLoginUserId());
+            sysUser.setUpdateTime(new Date());
             sysUserMapper.update(sysUser);
         }
         sysRelUserRoleMapper.batchSave(sysUser.getId(), sysUser.getRoleIds());

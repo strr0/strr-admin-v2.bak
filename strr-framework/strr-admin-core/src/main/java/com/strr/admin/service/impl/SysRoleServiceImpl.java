@@ -8,9 +8,10 @@ import com.strr.admin.service.SysRoleService;
 import com.strr.base.mapper.SCrudMapper;
 import com.strr.base.service.impl.SCrudServiceImpl;
 
+import java.util.Date;
 import java.util.List;
 
-public class SysRoleServiceImpl extends SCrudServiceImpl<SysRole, Integer> implements SysRoleService {
+public abstract class SysRoleServiceImpl extends SCrudServiceImpl<SysRole, Integer> implements SysRoleService {
     private final SysRoleMapper sysRoleMapper;
     private final SysRelUserRoleMapper sysRelUserRoleMapper;
     private final SysRelRoleResourceMapper sysRelRoleResourceMapper;
@@ -24,6 +25,31 @@ public class SysRoleServiceImpl extends SCrudServiceImpl<SysRole, Integer> imple
     @Override
     protected SysRoleMapper getMapper() {
         return sysRoleMapper;
+    }
+
+    /**
+     * 获取登录用户id
+     */
+    protected abstract Integer getLoginUserId();
+
+    /**
+     * 新增角色
+     */
+    @Override
+    public int save(SysRole entity) {
+        entity.setCreator(getLoginUserId());
+        entity.setCreateTime(new Date());
+        return super.save(entity);
+    }
+
+    /**
+     * 更新角色
+     */
+    @Override
+    public int update(SysRole entity) {
+        entity.setUpdator(getLoginUserId());
+        entity.setUpdateTime(new Date());
+        return super.update(entity);
     }
 
     /**
