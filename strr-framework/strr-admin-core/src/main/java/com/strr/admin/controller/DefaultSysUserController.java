@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public class SysUserController extends SCrudController<SysUser, Integer> {
+public class DefaultSysUserController extends SCrudController<SysUser, Integer> {
     private final SysUserService sysUserService;
 
-    public SysUserController(SysUserService sysUserService) {
+    public DefaultSysUserController(SysUserService sysUserService) {
         this.sysUserService = sysUserService;
     }
 

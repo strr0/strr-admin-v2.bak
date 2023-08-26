@@ -4,8 +4,8 @@ import com.strr.admin.mapper.SysPropertiesMapper;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomSysPropertiesServiceImpl extends SysPropertiesServiceImpl {
-    public CustomSysPropertiesServiceImpl(SysPropertiesMapper sysPropertiesMapper) {
+public class SysPropertiesServiceImpl extends DefaultSysPropertiesServiceImpl {
+    public SysPropertiesServiceImpl(SysPropertiesMapper sysPropertiesMapper) {
         super(sysPropertiesMapper);
     }
 }

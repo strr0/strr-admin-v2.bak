@@ -1,9 +1,15 @@
 package com.strr.admin.model;
 
+import com.strr.base.annotation.SColumn;
+import com.strr.base.annotation.SId;
+import com.strr.base.annotation.STable;
+
+@STable("sys_properties")
 public class SysProperties {
     /**
      * 主键
      */
+    @SId
     private Integer id;
 
     /**
@@ -24,6 +30,7 @@ public class SysProperties {
     /**
      * 键
      */
+    @SColumn("`key`")
     private String key;
 
     /**
@@ -34,6 +41,7 @@ public class SysProperties {
     /**
      * 值
      */
+    @SColumn("`value`")
     private String value;
 
     public Integer getId() {

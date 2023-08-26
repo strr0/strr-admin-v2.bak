@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public class SysRoleController extends SCrudController<SysRole, Integer> {
+public class DefaultSysRoleController extends SCrudController<SysRole, Integer> {
     private final SysRoleService sysRoleService;
 
-    public SysRoleController(SysRoleService sysRoleService) {
+    public DefaultSysRoleController(SysRoleService sysRoleService) {
         this.sysRoleService = sysRoleService;
     }
 

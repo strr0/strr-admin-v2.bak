@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.strr.admin.mapper.SysPropertiesMapper">
-    <insert id="save">
-        insert into sys_properties(application, profile, label, `key`, name, `value`)
-        values(#{application}, #{profile}, #{label}, #{key}, #{name}, #{value})
-    </insert>
-
     <insert id="batchSave">
         insert into sys_properties(application, profile, label, `key`, name, `value`) values
         <foreach collection="list" item="item" separator=",">
             (#{item.application}, #{item.profile}, #{item.label}, #{item.key}, #{item.name}, #{item.value})
         </foreach>
     </insert>
-
-    <update id="update">
-        update sys_properties set application = #{application}, profile = #{profile}, label = #{label},
-        `key` = #{key}, name = #{name}, `value` = #{value} where id = #{id}
-    </update>
-
-    <delete id="remove">
-        delete from sys_properties where id = #{id}
-    </delete>
 
     <delete id="batchRemove">
         delete from sys_properties where application = #{application}

@@ -1,30 +1,16 @@
 package com.strr.admin.mapper;
 
 import com.strr.admin.model.SysProperties;
+import com.strr.base.mapper.SCrudMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface SysPropertiesMapper {
-    /**
-     * 新增
-     */
-    int save(SysProperties entity);
-
+public interface SysPropertiesMapper extends SCrudMapper<SysProperties, Integer> {
     /**
      * 批量新增
      */
     int batchSave(@Param("list") List<SysProperties> list);
-
-    /**
-     * 修改
-     */
-    int update(SysProperties entity);
-
-    /**
-     * 删除
-     */
-    int remove(Integer id);
 
     /**
      * 批量删除

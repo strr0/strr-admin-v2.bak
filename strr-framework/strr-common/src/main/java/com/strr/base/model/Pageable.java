@@ -1,13 +1,8 @@
 package com.strr.base.model;
 
 public class Pageable {
-    private Integer page;
-    private Integer size;
-
-    public Pageable() {
-        page = 0;
-        size = 10;
-    }
+    private Integer page = 1;
+    private Integer size = 10;
 
     public Integer getPage() {
         return page;

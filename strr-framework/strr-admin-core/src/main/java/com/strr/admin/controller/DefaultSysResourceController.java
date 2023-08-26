@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-public class SysResourceController extends SCrudController<SysResource, Integer> {
+public class DefaultSysResourceController extends SCrudController<SysResource, Integer> {
     private final SysResourceService sysResourceService;
 
-    public SysResourceController(SysResourceService sysResourceService) {
+    public DefaultSysResourceController(SysResourceService sysResourceService) {
         this.sysResourceService = sysResourceService;
     }
 

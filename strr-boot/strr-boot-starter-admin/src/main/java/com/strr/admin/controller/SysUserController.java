@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/admin/sysUser")
-public class CustomSysUserController extends SysUserController {
-    public CustomSysUserController(SysUserService sysUserService) {
+public class SysUserController extends DefaultSysUserController {
+    public SysUserController(SysUserService sysUserService) {
         super(sysUserService);
     }
 }

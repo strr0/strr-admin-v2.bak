@@ -9,11 +9,11 @@ import com.strr.base.service.impl.SCrudServiceImpl;
 import java.util.Date;
 import java.util.List;
 
-public abstract class SysResourceServiceImpl extends SCrudServiceImpl<SysResource, Integer> implements SysResourceService {
+public abstract class DefaultSysResourceServiceImpl extends SCrudServiceImpl<SysResource, Integer> implements SysResourceService {
     private final SysResourceMapper sysResourceMapper;
     private final SysRelRoleResourceMapper sysRelRoleResourceMapper;
 
-    public SysResourceServiceImpl(SysResourceMapper sysResourceMapper, SysRelRoleResourceMapper sysRelRoleResourceMapper) {
+    public DefaultSysResourceServiceImpl(SysResourceMapper sysResourceMapper, SysRelRoleResourceMapper sysRelRoleResourceMapper) {
         this.sysResourceMapper = sysResourceMapper;
         this.sysRelRoleResourceMapper = sysRelRoleResourceMapper;
     }

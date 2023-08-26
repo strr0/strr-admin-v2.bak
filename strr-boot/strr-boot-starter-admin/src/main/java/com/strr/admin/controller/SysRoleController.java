@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/admin/sysRole")
-public class CustomSysRoleController extends SysRoleController {
-    public CustomSysRoleController(SysRoleService sysRoleService) {
+public class SysRoleController extends DefaultSysRoleController {
+    public SysRoleController(SysRoleService sysRoleService) {
         super(sysRoleService);
     }
 }

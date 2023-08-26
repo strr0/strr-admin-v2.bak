@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/admin/sysProperties")
-public class CustomSysPropertiesController extends SysPropertiesController {
-    public CustomSysPropertiesController(SysPropertiesService sysPropertiesService) {
+public class SysPropertiesController extends DefaultSysPropertiesController {
+    public SysPropertiesController(SysPropertiesService sysPropertiesService) {
         super(sysPropertiesService);
     }
 }

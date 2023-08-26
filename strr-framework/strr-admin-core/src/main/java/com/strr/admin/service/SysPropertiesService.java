@@ -1,29 +1,15 @@
 package com.strr.admin.service;
 
 import com.strr.admin.model.SysProperties;
+import com.strr.base.service.SCrudService;
 
 import java.util.List;
 
-public interface SysPropertiesService {
-    /**
-     * 新增
-     */
-    int save(SysProperties entity);
-
+public interface SysPropertiesService extends SCrudService<SysProperties, Integer> {
     /**
      * 批量保存
      */
     int batchSave(List<SysProperties> list);
-
-    /**
-     * 修改
-     */
-    int update(SysProperties entity);
-
-    /**
-     * 删除
-     */
-    int remove(Integer id);
 
     /**
      * 批量删除

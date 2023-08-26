@@ -10,11 +10,11 @@ import com.strr.base.service.impl.SCrudServiceImpl;
 import java.util.Date;
 import java.util.List;
 
-public abstract class SysUserServiceImpl extends SCrudServiceImpl<SysUser, Integer> implements SysUserService {
+public abstract class DefaultSysUserServiceImpl extends SCrudServiceImpl<SysUser, Integer> implements SysUserService {
     private final SysUserMapper sysUserMapper;
     private final SysRelUserRoleMapper sysRelUserRoleMapper;
 
-    public SysUserServiceImpl(SysUserMapper sysUserMapper, SysRelUserRoleMapper sysRelUserRoleMapper) {
+    public DefaultSysUserServiceImpl(SysUserMapper sysUserMapper, SysRelUserRoleMapper sysRelUserRoleMapper) {
         this.sysUserMapper = sysUserMapper;
         this.sysRelUserRoleMapper = sysRelUserRoleMapper;
     }

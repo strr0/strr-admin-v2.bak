@@ -6,8 +6,8 @@ import com.strr.admin.util.CustomSysUtil;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomSysUserServiceImpl extends SysUserServiceImpl {
-    public CustomSysUserServiceImpl(SysUserMapper sysUserMapper, SysRelUserRoleMapper sysRelUserRoleMapper) {
+public class SysUserServiceImpl extends DefaultSysUserServiceImpl {
+    public SysUserServiceImpl(SysUserMapper sysUserMapper, SysRelUserRoleMapper sysRelUserRoleMapper) {
         super(sysUserMapper, sysRelUserRoleMapper);
     }
 

@@ -2,28 +2,22 @@ package com.strr.admin.controller;
 
 import com.strr.admin.model.SysProperties;
 import com.strr.admin.service.SysPropertiesService;
+import com.strr.base.controller.SCrudController;
 import com.strr.base.model.Result;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public class SysPropertiesController {
+public class DefaultSysPropertiesController extends SCrudController<SysProperties, Integer> {
     private final SysPropertiesService sysPropertiesService;
 
-    public SysPropertiesController(SysPropertiesService sysPropertiesService) {
+    public DefaultSysPropertiesController(SysPropertiesService sysPropertiesService) {
         this.sysPropertiesService = sysPropertiesService;
     }
 
-    /**
-     * 新增
-     */
-    @PostMapping("/save")
-    public Result<SysProperties> save(SysProperties entity) {
-        int r = sysPropertiesService.save(entity);
-        if (r > 0) {
-            return Result.ok(entity);
-        }
-        return Result.error();
+    @Override
+    protected SysPropertiesService getService() {
+        return sysPropertiesService;
     }
 
     /**
@@ -34,30 +28,6 @@ public class SysPropertiesController {
         int r = sysPropertiesService.batchSave(list);
         if (r > 0) {
             return Result.ok(r);
-        }
-        return Result.error();
-    }
-
-    /**
-     * 修改
-     */
-    @PutMapping("/update")
-    public Result<SysProperties> update(SysProperties entity) {
-        int r = sysPropertiesService.update(entity);
-        if (r > 0) {
-            return Result.ok(entity);
-        }
-        return Result.error();
-    }
-
-    /**
-     * 删除
-     */
-    @DeleteMapping("/remove")
-    public Result<Void> remove(Integer id) {
-        int r = sysPropertiesService.remove(id);
-        if (r > 0) {
-            return Result.ok();
         }
         return Result.error();
     }

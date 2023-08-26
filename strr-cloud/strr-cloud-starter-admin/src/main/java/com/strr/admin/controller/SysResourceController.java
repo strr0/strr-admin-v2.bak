@@ -16,8 +16,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin/sysResource")
-public class CustomSysResourceController extends SysResourceController {
-    public CustomSysResourceController(SysResourceService sysResourceService) {
+public class SysResourceController extends DefaultSysResourceController {
+    public SysResourceController(SysResourceService sysResourceService) {
         super(sysResourceService);
     }
 
