@@ -21,6 +21,7 @@
         <mybatis-boot.version>3.0.0</mybatis-boot.version>
         <mybatis-spring.version>3.0.0</mybatis-spring.version>
         <mybatis.version>3.5.11</mybatis.version>
+        <mybatis-generator.version>1.4.0</mybatis-generator.version>
         <swagger.version>2.1.0</swagger.version>
     </properties>
 
@@ -66,6 +67,11 @@
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis-spring</artifactId>
                 <version>${mybatis-spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>${mybatis-generator.version}</version>
             </dependency>
 
             <!--  swagger  -->
