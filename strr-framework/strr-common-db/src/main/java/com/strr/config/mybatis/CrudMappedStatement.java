@@ -2,11 +2,9 @@ package com.strr.config.mybatis;
 
 import com.strr.base.exception.BuilderException;
 import com.strr.base.mapper.SCrudMapper;
-import com.strr.util.EntityUtil;
 import org.apache.ibatis.mapping.*;
 import org.apache.ibatis.session.Configuration;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -141,13 +139,7 @@ public class CrudMappedStatement {
             this.crudMappedStatement.clazz = clazz;
             // 结果集映射
             String entity = clazz.getSimpleName();
-            List<ResultMapping> resultMappings = new ArrayList<>();
-            for (Field field : clazz.getDeclaredFields()) {
-                String property = field.getName();
-                String column = EntityUtil.getColumn(field);
-                resultMappings.add(new ResultMapping.Builder(this.crudMappedStatement.configuration, property, column, field.getType()).build());
-            }
-            this.crudMappedStatement.resultMaps = Collections.singletonList(new ResultMap.Builder(this.crudMappedStatement.configuration, entity, clazz, resultMappings).build());
+            this.crudMappedStatement.resultMaps = Collections.singletonList(new ResultMap.Builder(this.crudMappedStatement.configuration, entity, clazz, new ArrayList<>()).build());
             this.crudMappedStatement.simpleResultMaps = Collections.singletonList(new ResultMap.Builder(this.crudMappedStatement.configuration, entity, int.class, new ArrayList<>()).build());
             this.crudMappedStatement.crudSqlSource = new CrudSqlSource.Builder(this.crudMappedStatement.configuration, clazz).build();
             this.crudMappedStatement.build = true;

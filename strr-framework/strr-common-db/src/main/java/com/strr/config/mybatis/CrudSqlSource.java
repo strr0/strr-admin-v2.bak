@@ -2,7 +2,7 @@ package com.strr.config.mybatis;
 
 import com.strr.base.exception.BuilderException;
 import com.strr.base.exception.KeyNotFoundException;
-import com.strr.util.EntityUtil;
+import com.strr.util.ModelUtil;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.mapping.SqlSource;
 import org.apache.ibatis.scripting.defaults.RawSqlSource;
@@ -65,7 +65,7 @@ public class CrudSqlSource {
     private SqlNode listSqlNode() {
         SQL sql = new SQL();
         for (Field field : fields) {
-            sql.SELECT(EntityUtil.getColumn(field));
+            sql.SELECT(ModelUtil.getColumn(field));
         }
         sql.FROM(table);
         return new StaticTextSqlNode(sql.toString());
@@ -75,10 +75,10 @@ public class CrudSqlSource {
         SQL sql = new SQL();
         sql.INSERT_INTO(table);
         for (Field field : fields) {
-            if (EntityUtil.isKey(field)) {
+            if (ModelUtil.isKey(field)) {
                 continue;
             }
-            sql.VALUES(EntityUtil.getColumn(field), String.format("#{%s}", field.getName()));
+            sql.VALUES(ModelUtil.getColumn(field), String.format("#{%s}", field.getName()));
         }
         return new StaticTextSqlNode(sql.toString());
     }
@@ -90,26 +90,26 @@ public class CrudSqlSource {
     private SqlNode updateSetSqlNode() {
         List<SqlNode> ifNodes = new ArrayList<>();
         for (Field field : fields) {
-            if (EntityUtil.isKey(field)) {
+            if (ModelUtil.isKey(field)) {
                 continue;
             }
             String property = field.getName();
-            ifNodes.add(new IfSqlNode(new TextSqlNode(String.format("%s = #{%s},", EntityUtil.getColumn(field), property)),
+            ifNodes.add(new IfSqlNode(new TextSqlNode(String.format("%s = #{%s},", ModelUtil.getColumn(field), property)),
                     String.format("%s != null && %s != ''", property, property)));
         }
         return new TrimSqlNode(configuration, new MixedSqlNode(ifNodes), "SET", null, null, ",");
     }
 
     private SqlNode updateWhereSqlNode() throws KeyNotFoundException {
-        Field key = EntityUtil.getKey(fields);
-        String keyColumn = EntityUtil.getColumn(key);
+        Field key = ModelUtil.getKey(fields);
+        String keyColumn = ModelUtil.getColumn(key);
         String keyProperty = key.getName();
         return new StaticTextSqlNode(String.format("WHERE %s = #{%s}", keyColumn, keyProperty));
     }
 
     private SqlNode removeSqlNode() throws KeyNotFoundException {
-        Field key = EntityUtil.getKey(fields);
-        String keyColumn = EntityUtil.getColumn(key);
+        Field key = ModelUtil.getKey(fields);
+        String keyColumn = ModelUtil.getColumn(key);
         String keyProperty = key.getName();
         SQL sql = new SQL();
         sql.DELETE_FROM(table);
@@ -118,12 +118,12 @@ public class CrudSqlSource {
     }
 
     private SqlNode getSqlNode() throws KeyNotFoundException {
-        Field key = EntityUtil.getKey(fields);
-        String keyColumn = EntityUtil.getColumn(key);
+        Field key = ModelUtil.getKey(fields);
+        String keyColumn = ModelUtil.getColumn(key);
         String keyProperty = key.getName();
         SQL sql = new SQL();
         for (Field field : fields) {
-            sql.SELECT(EntityUtil.getColumn(field));
+            sql.SELECT(ModelUtil.getColumn(field));
         }
         sql.FROM(table);
         sql.WHERE(String.format("%s = #{%s}", keyColumn, keyProperty));
@@ -142,13 +142,13 @@ public class CrudSqlSource {
             Field[] fields = this.crudSqlSource.clazz.getDeclaredFields();
             this.crudSqlSource.fields = fields;
             // 表名
-            this.crudSqlSource.table = EntityUtil.getTable(this.crudSqlSource.clazz);
+            this.crudSqlSource.table = ModelUtil.getTable(this.crudSqlSource.clazz);
             // 查询条件
             List<SqlNode> ifNodes = new ArrayList<>();
             for (Field field : fields) {
                 String property = field.getName();
-                String column = EntityUtil.getColumn(field);
-                String condition = EntityUtil.isFuzzy(field) ? String.format(" and %s like \"%%\"#{%s}\"%%\"", column, property) :
+                String column = ModelUtil.getColumn(field);
+                String condition = ModelUtil.isFuzzy(field) ? String.format(" and %s like \"%%\"#{%s}\"%%\"", column, property) :
                         String.format(" and %s = #{%s} ", column, property);
                 ifNodes.add(new IfSqlNode(new TextSqlNode(condition), String.format("%s != null && %s != ''", property, property)));
             }

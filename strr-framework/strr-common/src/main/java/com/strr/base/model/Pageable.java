@@ -20,7 +20,7 @@ public class Pageable {
         this.size = size;
     }
 
-    public <T> Page<T> toPage() {
+    public <T> Page<T> page() {
         return new Page<>(page, size);
     }
 }
