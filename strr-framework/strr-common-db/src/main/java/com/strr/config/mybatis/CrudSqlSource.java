@@ -20,6 +20,7 @@ public class CrudSqlSource {
     private Field[] fields;
     private String table;
     private SqlNode applyWhere;
+    private SqlNode pageApplyWhere;
 
     private CrudSqlSource() {}
 
@@ -53,6 +54,11 @@ public class CrudSqlSource {
     public SqlSource getSqlSource() throws BuilderException {
         SqlNode sqlNode = getSqlNode();
         return new RawSqlSource(configuration, sqlNode, clazz);
+    }
+
+    public SqlSource pageSqlSource() {
+        SqlNode sqlNode = listSqlNode();
+        return new DynamicSqlSource(configuration, new MixedSqlNode(Arrays.asList(sqlNode, pageApplyWhere)));
     }
 
     private SqlNode countSqlNode() {
@@ -145,14 +151,20 @@ public class CrudSqlSource {
             this.crudSqlSource.table = ModelUtil.getTable(this.crudSqlSource.clazz);
             // 查询条件
             List<SqlNode> ifNodes = new ArrayList<>();
+            List<SqlNode> pageIfNodes = new ArrayList<>();
             for (Field field : fields) {
                 String property = field.getName();
                 String column = ModelUtil.getColumn(field);
                 String condition = ModelUtil.isFuzzy(field) ? String.format(" and %s like \"%%\"#{%s}\"%%\"", column, property) :
                         String.format(" and %s = #{%s} ", column, property);
                 ifNodes.add(new IfSqlNode(new TextSqlNode(condition), String.format("%s != null && %s != ''", property, property)));
+                // 分页
+                String pageCondition = ModelUtil.isFuzzy(field) ? String.format(" and %s like \"%%\"#{param.%s}\"%%\"", column, property) :
+                        String.format(" and %s = #{param.%s} ", column, property);
+                pageIfNodes.add(new IfSqlNode(new TextSqlNode(pageCondition), String.format("param.%s != null && param.%s != ''", property, property)));
             }
             this.crudSqlSource.applyWhere = new WhereSqlNode(this.crudSqlSource.configuration, new MixedSqlNode(ifNodes));
+            this.crudSqlSource.pageApplyWhere = new WhereSqlNode(this.crudSqlSource.configuration, new MixedSqlNode(pageIfNodes));
         }
 
         public CrudSqlSource build() {

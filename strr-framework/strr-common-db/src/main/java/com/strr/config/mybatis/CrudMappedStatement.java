@@ -33,6 +33,8 @@ public class CrudMappedStatement {
         addUpdateStatement();
         addRemoveStatement();
         addGetStatement();
+        // 分页
+        addPageStatement();
     }
 
     public void addCountByParamStatement() {
@@ -118,6 +120,18 @@ public class CrudMappedStatement {
         } catch (BuilderException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addPageStatement() {
+        SqlSource page = crudSqlSource.pageSqlSource();
+        MappedStatement.Builder mappedStatementBuilder = new MappedStatement.Builder(
+                configuration,
+                String.format("%s.page", mapperInterface.getTypeName()),
+                page,
+                SqlCommandType.SELECT
+        );
+        mappedStatementBuilder.resultMaps(resultMaps);
+        configuration.addMappedStatement(mappedStatementBuilder.build());
     }
 
     public static class Builder {

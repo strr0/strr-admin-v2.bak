@@ -4,7 +4,6 @@ import com.strr.base.mapper.SCrudMapper;
 import com.strr.base.model.Page;
 import com.strr.base.model.Pageable;
 import com.strr.base.service.SCrudService;
-import com.strr.util.PageUtil;
 
 import java.io.Serializable;
 
@@ -13,15 +12,7 @@ public abstract class SCrudServiceImpl<T, ID extends Serializable> implements SC
 
     @Override
     public Page<T> page(T param, Pageable pageable) {
-        Page<T> page = pageable.page();
-        int count = getMapper().countByParam(param);
-        page.setTotal(count);
-        if (count > 0) {
-            PageUtil.start(pageable);
-            page.setContent(getMapper().listByParam(param));
-            PageUtil.end();
-        }
-        return page;
+        return getMapper().page(param, pageable);
     }
 
     @Override
