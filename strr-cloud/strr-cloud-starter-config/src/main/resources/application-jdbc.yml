@@ -10,7 +10,7 @@ spring:
     config:
       server:
         encrypt:
-          enabled: true
+          enabled: false
         jdbc:
           sql: 'select `key`, `value` from sys_properties where application = ? and profile= ? and label = ?'
           sql-without-profile: 'select `key`, `value` from sys_properties where application = ? and profile is null and label = ?'
