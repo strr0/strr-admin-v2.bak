@@ -7,7 +7,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 
-public class CustomSysUtil {
+/**
+ * 登录工具
+ */
+public class LoginUtil {
     /**
      * 获取登录用户id
      */

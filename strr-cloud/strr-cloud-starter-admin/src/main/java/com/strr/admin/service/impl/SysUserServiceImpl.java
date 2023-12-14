@@ -2,7 +2,7 @@ package com.strr.admin.service.impl;
 
 import com.strr.admin.mapper.SysRelUserRoleMapper;
 import com.strr.admin.mapper.SysUserMapper;
-import com.strr.admin.util.CustomSysUtil;
+import com.strr.admin.util.LoginUtil;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +13,6 @@ public class SysUserServiceImpl extends DefaultSysUserServiceImpl {
 
     @Override
     protected Integer getLoginUserId() {
-        return CustomSysUtil.getLoginUserId();
+        return LoginUtil.getLoginUserId();
     }
 }
