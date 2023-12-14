@@ -3,10 +3,9 @@ package com.strr.admin.controller;
 import com.strr.admin.model.SysResource;
 import com.strr.admin.model.vo.SysResourceVO;
 import com.strr.admin.service.SysResourceService;
-import com.strr.admin.util.SysUtil;
+import com.strr.admin.util.MenuUtil;
 import com.strr.base.controller.SCrudController;
 import com.strr.base.model.Result;
-import com.strr.base.service.SCrudService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -30,7 +29,7 @@ public class DefaultSysResourceController extends SCrudController<SysResource, I
     @GetMapping("/menuTree")
     public Result<List<SysResourceVO>> menuTree(SysResource param) {
         List<SysResource> sysResourceList = sysResourceService.listByParam(param);
-        return Result.ok(SysUtil.buildMenuTree(sysResourceList));
+        return Result.ok(MenuUtil.buildMenuTree(sysResourceList));
     }
 
     /**

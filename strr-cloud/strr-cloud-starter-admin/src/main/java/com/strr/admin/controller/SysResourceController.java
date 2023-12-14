@@ -3,7 +3,7 @@ package com.strr.admin.controller;
 import com.strr.admin.model.SysResource;
 import com.strr.admin.model.vo.SysRouteVO;
 import com.strr.admin.service.SysResourceService;
-import com.strr.admin.util.SysUtil;
+import com.strr.admin.util.MenuUtil;
 import com.strr.base.model.Result;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -28,8 +28,8 @@ public class SysResourceController extends DefaultSysResourceController {
     @GetMapping("/getUserRoutes")
     public Result<?> getUserRoutes(@AuthenticationPrincipal Jwt jwt) {
         List<SysResource> resources = getService().listByUserId(((Long) jwt.getClaims().get("user_id")).intValue());
-        List<SysRouteVO> routes = SysUtil.buildRouteTree(resources);
-        String home = SysUtil.getFirstRoute(routes);
+        List<SysRouteVO> routes = MenuUtil.buildRouteTree(resources);
+        String home = MenuUtil.getFirstRoute(routes);
         return Result.ok(new HashMap<String, Object>(){{
             put("routes", routes);
             put("home", home);

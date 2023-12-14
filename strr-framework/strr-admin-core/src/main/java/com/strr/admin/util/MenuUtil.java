@@ -10,7 +10,10 @@ import org.springframework.beans.BeanUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SysUtil {
+/**
+ * 菜单工具
+ */
+public class MenuUtil {
     private static final String DIR_TYPE = "0";  // 目录
     private static final String MENU_TYPE = "1";  // 菜单
     private static final String BTN_TYPE = "2";  // 按钮
