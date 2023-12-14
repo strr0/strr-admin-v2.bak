@@ -73,8 +73,8 @@ public class ExecutorUtil {
     }
 
     public static Pageable getPageable(Object parameter) {
-        if (parameter instanceof Map) {
-            Collection<?> params = ((Map<?, ?>) parameter).values();
+        if (parameter instanceof Map<?, ?> map) {
+            Collection<?> params = map.values();
             for (Object param : params) {
                 if (param instanceof Pageable pageable) {
                     return pageable;
