@@ -18,7 +18,7 @@ public class LoginUtil {
         return Optional.ofNullable(SecurityContextHolder.getContext())
                 .map(SecurityContext::getAuthentication)
                 .map(Authentication::getPrincipal)
-                .map(item -> item instanceof SysUserDetails ? (SysUserDetails) item : null)
+                .map(item -> item instanceof SysUserDetails details ? details : null)
                 .map(SysUserDetails::getId)
                 .orElse(null);
     }

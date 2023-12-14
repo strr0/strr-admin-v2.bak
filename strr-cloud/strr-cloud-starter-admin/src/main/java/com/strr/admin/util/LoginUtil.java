@@ -18,7 +18,7 @@ public class LoginUtil {
         return Optional.ofNullable(SecurityContextHolder.getContext())
                 .map(SecurityContext::getAuthentication)
                 .map(Authentication::getPrincipal)
-                .map(item -> item instanceof Jwt ? (Jwt) item : null)
+                .map(item -> item instanceof Jwt jwt ? jwt : null)
                 .map(Jwt::getClaims).map(map -> (Long) map.get("user_id")).map(Long::intValue)
                 .orElse(null);
     }
