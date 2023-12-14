@@ -197,7 +197,6 @@ INSERT INTO `sys_properties` VALUES (17, 'adminservice', NULL, 'master', 'spring
 INSERT INTO `sys_properties` VALUES (18, 'adminservice', NULL, 'master', 'spring.datasource.username', '数据库账号', 'root');
 INSERT INTO `sys_properties` VALUES (19, 'adminservice', NULL, 'master', 'spring.datasource.password', '数据库密码', '{cipher}b508a19f5f714b97916c70bd872da77208e5dca3da9830fefe9a1a50f683de9c');
 INSERT INTO `sys_properties` VALUES (20, 'adminservice', NULL, 'master', 'mybatis.mapper-locations', 'mybatis mapper地址', 'classpath:mapper/*.xml');
-INSERT INTO `sys_properties` VALUES (21, 'adminservice', NULL, 'master', 'mybatis.configuration.map-underscore-to-camel-case', '开启驼峰映射', 'true');
 INSERT INTO `sys_properties` VALUES (22, 'feignservice', NULL, 'master', 'server.port', '端口', '8081');
 INSERT INTO `sys_properties` VALUES (23, 'feignservice', NULL, 'master', 'eureka.instance.prefer-ip-address', '以ip地址注册', 'true');
 INSERT INTO `sys_properties` VALUES (24, 'feignservice', NULL, 'master', 'eureka.client.register-with-eureka', '注册到eureka', 'true');

@@ -8,5 +8,3 @@ spring:
     password: password
 mybatis:
   mapper-locations: classpath:mapper/*.xml, classpath:customMapper/*.xml
-  configuration:
-    map-underscore-to-camel-case: true

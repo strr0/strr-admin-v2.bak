@@ -1,5 +1,6 @@
 package com.strr.config.mybatis;
 
+import com.strr.base.annotation.SColumn;
 import com.strr.util.ModelUtil;
 import org.apache.ibatis.reflection.Reflector;
 
@@ -23,7 +24,9 @@ public class AnnotationReflector extends Reflector {
     private void addAnnotationField(Class<?> clazz) {
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
-            String column = ModelUtil.getColumn(field);
+            // 下划线转驼峰
+            String column = ModelUtil.getSColumn(field).map(SColumn::value).map(value -> value.replace("_", ""))
+                    .orElse(field.getName());
             annotationPropertyMap.put(column.toUpperCase(Locale.ENGLISH), field.getName());
         }
     }
