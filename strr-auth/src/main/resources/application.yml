@@ -1,0 +1,10 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: strr-auth
+  config:
+    import: optional:configserver:http://localhost:8888
+encrypt:
+  key: secret

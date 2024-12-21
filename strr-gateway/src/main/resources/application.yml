@@ -1,0 +1,8 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: strr-gateway
+  config:
+    import: optional:configserver:http://localhost:8888
